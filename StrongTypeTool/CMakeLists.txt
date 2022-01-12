@@ -18,8 +18,8 @@ add_library(Deserializer
         src/Deserializer/YamlDeserializer.h)
 
 add_library(Serializer
-        src/Serializer/CPPSerializer.cpp
-        src/Serializer/CPPSerializer.h)
+        src/Serializer/YamlSerializer.cpp
+        src/Serializer/YamlSerializer.h)
 
 target_link_libraries(Deserializer Entities)
 target_link_libraries(Serializer Entities)
