@@ -21,6 +21,11 @@ stt::StrongType::Builder *stt::StrongType::Builder::setBinOps(std::vector<stt::B
     return this;
 }
 
+stt::StrongType::Builder *stt::StrongType::Builder::setUniOps(std::vector<stt::UnaryOperation> unaryOperations) {
+    this->unaryOperations = std::move(unaryOperations);
+    return this;
+}
+
 const std::string &stt::StrongType::getTypeName() const {
     return this->typeName;
 }
@@ -32,3 +37,11 @@ const std::string &stt::StrongType::getWraps() const {
 const std::vector<stt::BinaryOperation> &stt::StrongType::getBinaryOperations() const {
     return this->binaryOperations;
 }
+
+const std::vector<stt::UnaryOperation> &stt::StrongType::getUnaryOperations() const {
+    return this->unaryOperations;
+}
+
+stt::StrongType::StrongType(const stt::StrongType::Builder &builder)
+    : typeName(builder.typeName), wraps(builder.wraps), binaryOperations(builder.binaryOperations),
+    unaryOperations(builder.unaryOperations) {}

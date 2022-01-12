@@ -11,6 +11,7 @@
 #include <string>
 
 #include "BinaryOperation.h"
+#include "UnaryOperation.h"
 
 namespace stt {
     class StrongType {
@@ -18,10 +19,12 @@ namespace stt {
         std::string typeName;
         std::string wraps;
         std::vector<stt::BinaryOperation> binaryOperations;
+        std::vector<stt::UnaryOperation> unaryOperations;
     public:
         const std::string &getTypeName() const;
         const std::string &getWraps() const;
         const std::vector<stt::BinaryOperation> &getBinaryOperations() const;
+        const std::vector<stt::UnaryOperation> &getUnaryOperations() const;
 
         StrongType(std::string typeName, std::string wraps, std::vector<stt::BinaryOperation> binOps)
             : typeName(std::move(typeName)), wraps(std::move(wraps)), binaryOperations(std::move(binOps)) {}
@@ -31,15 +34,15 @@ namespace stt {
             std::string typeName;
             std::string wraps;
             std::vector<stt::BinaryOperation> binaryOperations;
+            std::vector<stt::UnaryOperation> unaryOperations;
 
             Builder* setTypeName(std::string typeName);
             Builder* setWraps(std::string wraps);
             Builder* setBinOps(std::vector<stt::BinaryOperation> binaryOperations);
+            Builder* setUniOps(std::vector<stt::UnaryOperation> unaryOperations);
             StrongType build() { return StrongType(*this); }
         };
-        explicit StrongType(const Builder& builder)
-          : typeName(builder.typeName), wraps(builder.wraps),
-          binaryOperations(builder.binaryOperations) {}
+        StrongType(const Builder& builder);
     };
 }
 

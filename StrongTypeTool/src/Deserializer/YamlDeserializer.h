@@ -16,6 +16,7 @@ public:
     static std::vector<stt::StrongType> deserialize(std::string filePath);
     static stt::StrongType deserializeStrongType(YAML::Node node);
     static stt::BinaryOperation deserializeBinaryOperation(YAML::Node node);
+    static stt::UnaryOperation deserializeUnaryOperation(YAML::Node node);
 private:
     YamlDeserializer() = default;
 };
