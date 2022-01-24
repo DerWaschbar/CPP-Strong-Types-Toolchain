@@ -25,17 +25,17 @@ add_library(Serializer
 
 
 # Links
-target_link_libraries(Deserializer Entities)
-target_link_libraries(Serializer Entities)
+target_link_libraries(Deserializer PUBLIC Entities)
+target_link_libraries(Serializer PUBLIC Entities)
 
-target_link_libraries(StrongTypeTool Entities)
-target_link_libraries(StrongTypeTool Deserializer)
-target_link_libraries(StrongTypeTool Serializer)
+target_link_libraries(StrongTypeTool PUBLIC Entities)
+target_link_libraries(StrongTypeTool PUBLIC Deserializer)
+target_link_libraries(StrongTypeTool PUBLIC Serializer)
 
 
 # Dependencies
 find_package(yaml-cpp 0.6.0 REQUIRED)
-target_link_libraries(StrongTypeTool yaml-cpp)
+target_link_libraries(StrongTypeTool PRIVATE yaml-cpp)
 
-find_package(nlohmann_json 3.2.0 REQUIRED)
-target_link_libraries(StrongTypeTool nlohmann_json::nlohmann_json)
+find_package(inja 3.3.0 REQUIRED)
+target_link_libraries(StrongTypeTool INTERFACE inja)
