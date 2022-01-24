@@ -36,3 +36,6 @@ target_link_libraries(StrongTypeTool Serializer)
 # Dependencies
 find_package(yaml-cpp 0.6.0 REQUIRED)
 target_link_libraries(StrongTypeTool yaml-cpp)
+
+find_package(nlohmann_json 3.2.0 REQUIRED)
+target_link_libraries(StrongTypeTool nlohmann_json::nlohmann_json)
