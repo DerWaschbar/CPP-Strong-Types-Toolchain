@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(StrongTypeTool main.cpp)
 
+
+# Libs
 add_library(Entities
         src/Entities/BinaryOperation.cpp
         src/Entities/BinaryOperation.h
@@ -21,6 +23,8 @@ add_library(Serializer
         src/Serializer/YamlSerializer.cpp
         src/Serializer/YamlSerializer.h)
 
+
+# Links
 target_link_libraries(Deserializer Entities)
 target_link_libraries(Serializer Entities)
 
@@ -29,5 +33,6 @@ target_link_libraries(StrongTypeTool Deserializer)
 target_link_libraries(StrongTypeTool Serializer)
 
 
-include_directories("/home/waschbar/Desktop/Thesis/yaml-cpp-yaml-cpp-0.6.0/include")
-target_link_libraries(StrongTypeTool "/home/waschbar/Desktop/Thesis/yaml-cpp-yaml-cpp-0.6.0/build/libyaml-cpp.a")
+# Dependencies
+find_package(yaml-cpp 0.6.0 REQUIRED)
+target_link_libraries(StrongTypeTool yaml-cpp)
