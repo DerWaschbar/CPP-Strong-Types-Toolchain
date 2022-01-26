@@ -21,7 +21,11 @@ add_library(Deserializer
 
 add_library(Serializer
         src/Serializer/YamlSerializer.cpp
-        src/Serializer/YamlSerializer.h)
+        src/Serializer/YamlSerializer.h
+        src/Serializer/CPPHSerializer.cpp
+        src/Serializer/CPPHSerializer.h
+        src/Serializer/CPPSerializer.cpp
+        src/Serializer/CPPSerializer.h)
 
 
 # Links
