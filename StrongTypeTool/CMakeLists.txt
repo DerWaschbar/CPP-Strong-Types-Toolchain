@@ -3,7 +3,7 @@ project(StrongTypeTool)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(StrongTypeTool main.cpp)
+add_executable(StrongTypeTool main.cpp src/Generator.cpp src/Generator.h)
 
 
 # Libs
@@ -43,3 +43,6 @@ target_link_libraries(StrongTypeTool PRIVATE yaml-cpp)
 
 find_package(inja 3.3.0 REQUIRED)
 target_link_libraries(StrongTypeTool INTERFACE inja)
+
+find_package(Boost 1.71.0 COMPONENTS filesystem)
+target_link_libraries(StrongTypeTool PRIVATE Boost::filesystem)
