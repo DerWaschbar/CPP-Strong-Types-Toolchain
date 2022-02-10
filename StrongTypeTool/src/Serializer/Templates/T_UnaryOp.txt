@@ -1,0 +1,3 @@
+{{ res }} {{ name }}::operator{{ op }}() const {
+    return {{ name }}{{{ op }}this->get()};
+}

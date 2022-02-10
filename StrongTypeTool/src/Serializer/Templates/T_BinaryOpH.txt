@@ -1,0 +1,1 @@
+{{ res }} operator{{ op }}(const {{ arg }} &rhs) const;

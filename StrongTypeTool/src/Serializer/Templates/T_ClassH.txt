@@ -1,0 +1,25 @@
+//
+// Created by program.
+//
+
+#ifndef {{ NAME }}_H
+#define {{ NAME }}_H
+
+
+class {{ name }} {
+public:
+    using wrappedType = {{ wraps }};
+
+    explicit constexpr Velocity(wrappedType const& value) : wrappedValue(value) {}
+
+    constexpr wrappedType& get() { return wrappedValue; }
+    constexpr wrappedType get() const { return wrappedValue; }
+
+    {{ ops }}
+
+private:
+    wrappedType wrappedValue;
+};
+
+
+#endif //{{ NAME }}_H
