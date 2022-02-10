@@ -15,7 +15,8 @@ public:
     constexpr wrappedType& get() { return wrappedValue; }
     constexpr wrappedType get() const { return wrappedValue; }
 
-    {{ ops }}
+public:
+{{ ops }}
 
 private:
     wrappedType wrappedValue;
