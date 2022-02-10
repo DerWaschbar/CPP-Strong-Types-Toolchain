@@ -34,11 +34,13 @@ std::vector<stt::StrongType> Generator::loadConfiguration() {
 }
 
 bool Generator::generateStrongType(stt::StrongType type) {
+    CPPHSerializer cpphSerializer;
     const std::string headerFileName = type.getTypeName() + ".h";
-    const std::string headerText = CPPHSerializer::serializeStrongType(type);
+    const std::string headerText = cpphSerializer.serializeStrongType(type);
 
+    CPPSerializer cppSerializer;
     const std::string classFileName = type.getTypeName() + ".cpp";
-    const std::string classText = CPPSerializer::serializeStrongType(type);
+    const std::string classText = cppSerializer.serializeStrongType(type);
 
     /// Here should be validation part
 

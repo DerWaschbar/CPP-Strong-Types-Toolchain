@@ -25,7 +25,9 @@ add_library(Serializer
         src/Serializer/CPPHSerializer.cpp
         src/Serializer/CPPHSerializer.h
         src/Serializer/CPPSerializer.cpp
-        src/Serializer/CPPSerializer.h)
+        src/Serializer/CPPSerializer.h
+        src/Serializer/TemplateManager.cpp
+        src/Serializer/TemplateManager.h)
 
 
 # Links

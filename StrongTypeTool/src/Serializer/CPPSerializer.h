@@ -9,13 +9,20 @@
 #include <string>
 #include <vector>
 #include "../Entities/StrongType.h"
+#include "TemplateManager.h"
 
 class CPPSerializer {
 public:
-    static std::vector<std::string> serialize(const std::vector<stt::StrongType>& strongTypes);
-    static std::string serializeStrongType(const stt::StrongType& strongType);
-    static std::string serializeBinaryOperation(const stt::BinaryOperation& binaryOperation);
-    static std::string serializeUnaryOperation(const stt::UnaryOperation& unaryOperation);
+    explicit CPPSerializer(TemplateManager templateManager) : templateManager(std::move(templateManager)) {}
+    CPPSerializer() : CPPSerializer(TemplateManager()) {}
+public:
+    std::vector<std::string> serialize(const std::vector<stt::StrongType>& strongTypes);
+    std::string serializeStrongType(const stt::StrongType& strongType);
+    std::string serializeBinaryOperation(const stt::BinaryOperation& binaryOperation);
+    std::string serializeUnaryOperation(const stt::UnaryOperation& unaryOperation);
+
+private:
+    const TemplateManager templateManager;
 };
 
 

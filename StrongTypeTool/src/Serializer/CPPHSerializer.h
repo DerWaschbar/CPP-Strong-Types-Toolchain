@@ -7,15 +7,23 @@
 
 
 #include <string>
+#include <utility>
 #include <vector>
 #include "../Entities/StrongType.h"
+#include "TemplateManager.h"
 
 class CPPHSerializer {
 public:
-    static std::vector<std::string> serialize(const std::vector<stt::StrongType>& strongTypes);
-    static std::string serializeStrongType(const stt::StrongType& strongType);
-    static std::string serializeBinaryOperation(const stt::BinaryOperation& binaryOperation);
-    static std::string serializeUnaryOperation(const stt::UnaryOperation& unaryOperation);
+    explicit CPPHSerializer(TemplateManager templateManager) : templateManager(std::move(templateManager)) {}
+    CPPHSerializer() : CPPHSerializer(TemplateManager()) {}
+public:
+    std::vector<std::string> serialize(const std::vector<stt::StrongType>& strongTypes);
+    std::string serializeStrongType(const stt::StrongType& strongType);
+    std::string serializeBinaryOperation(const stt::BinaryOperation& binaryOperation);
+    std::string serializeUnaryOperation(const stt::UnaryOperation& unaryOperation);
+
+private:
+    const TemplateManager templateManager;
 };
 
 

@@ -8,27 +8,6 @@
 #include <inja/inja.hpp>
 #include <boost/algorithm/string.hpp>
 
-const std::string CPPH_HEADER = "//\n"
-                           "// Created by program.\n"
-                           "//\n"
-                           "\n"
-                           "#ifndef {{ NAME }}_H\n"
-                           "#define {{ NAME }}_H\n"
-                           "\n"
-                           "\n"
-                           "class {{ name }} {\n"
-                           "public:\n"
-                           "    using wrappedType = {{ wraps }};\n"
-                           "\n"
-                           "    explicit constexpr {{ name }}(wrappedType const& value) : wrappedValue(value) {}\n"
-                           "    wrappedType constexpr get() const { return wrappedValue; }\n\n";
-const std::string CPPH_FOOTER = "private:\n"
-                               "    wrappedType wrappedValue;\n"
-                               "};\n"
-                               "\n"
-                               "\n"
-                               "#endif // {{ NAME }}_H";
-
 std::vector<std::string> CPPHSerializer::serialize(const std::vector<stt::StrongType> &strongTypes) {
     std::vector<std::string> headers(strongTypes.size());
     for(const stt::StrongType& type : strongTypes) {
@@ -38,27 +17,24 @@ std::vector<std::string> CPPHSerializer::serialize(const std::vector<stt::Strong
 }
 
 std::string CPPHSerializer::serializeStrongType(const stt::StrongType &strongType) {
+    std::string ops;
+    for(const stt::BinaryOperation &op : strongType.getBinaryOperations()) {
+        ops += serializeBinaryOperation(op);
+    }
+    ops += "\n";
+
+    for(const stt::UnaryOperation &op : strongType.getUnaryOperations()) {
+        ops += serializeUnaryOperation(op);
+    }
+
+
     nlohmann::json type;
     type["name"] = strongType.getTypeName();
     type["NAME"] = boost::to_upper_copy<std::string>(strongType.getTypeName());
     type["wraps"] = strongType.getWraps();
+    type["ops"] = ops;
 
-    std::string header;
-    header += inja::render(CPPH_HEADER, type);
-
-    header += "public:\n";
-    for(const stt::BinaryOperation &op : strongType.getBinaryOperations()) {
-        header += serializeBinaryOperation(op);
-    }
-    header += "\n";
-
-    for(const stt::UnaryOperation &op : strongType.getUnaryOperations()) {
-        header += serializeUnaryOperation(op);
-    }
-    header += "\n";
-
-    header += inja::render(CPPH_FOOTER, type);
-    return header;
+    return inja::render((&templateManager)->getTemplate(Template::T_ClassHeader), type);
 }
 
 std::string CPPHSerializer::serializeBinaryOperation(const stt::BinaryOperation &binaryOperation) {
@@ -67,12 +43,13 @@ std::string CPPHSerializer::serializeBinaryOperation(const stt::BinaryOperation 
     opJson["arg"] = binaryOperation.getArgType();
     opJson["op"] = binaryOperation.getOperation();
 
-    const std::string OP = "    " "{{ res }} operator{{ op }}(const {{ arg }} &other) const;" "\n";
-
-    return inja::render(OP, opJson);
+    return inja::render((&templateManager)->getTemplate(Template::T_BinaryOpHeader), opJson);
 }
 
 std::string CPPHSerializer::serializeUnaryOperation(const stt::UnaryOperation &unaryOperation) {
-    /// TODO: Do this!
-    return "// TODO: unary op";
+    nlohmann::json opJson;
+    opJson["res"] = unaryOperation.getResType();
+    opJson["op"] = unaryOperation.getOperation();
+
+    return inja::render((&templateManager)->getTemplate(Template::T_UnaryOpHeader), opJson);
 }
