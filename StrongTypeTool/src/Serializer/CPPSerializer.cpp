@@ -8,9 +8,9 @@
 #include <inja/inja.hpp>
 #include <boost/algorithm/string.hpp>
 
-std::vector<std::string> CPPSerializer::serialize(const std::vector<stt::StrongType> &strongTypes) {
-    std::vector<std::string> classes(strongTypes.size());
-    for(const stt::StrongType& type : strongTypes) {
+std::vector<std::string> CPPSerializer::serialize(const stt::StrongTypeSet& strongTypeSet) {
+    std::vector<std::string> classes(strongTypeSet.getTypes().size());
+    for(const stt::StrongType& type : strongTypeSet.getTypes()) {
         classes.push_back(serializeStrongType(type));
     }
     return classes;

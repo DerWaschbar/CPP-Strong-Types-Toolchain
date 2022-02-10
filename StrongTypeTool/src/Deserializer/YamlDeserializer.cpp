@@ -4,13 +4,13 @@
 
 #include "YamlDeserializer.h"
 
-std::vector<stt::StrongType> YamlDeserializer::deserialize(std::string filePath) {
+stt::StrongTypeSet YamlDeserializer::deserialize(const std::string& filePath) {
     YAML::Node config = YAML::LoadFile(filePath);
     std::vector<stt::StrongType> types{};
     for(int i = 0; i < config["StrongTypes"].size(); i++) {
         types.push_back(deserializeStrongType(config["StrongTypes"][i]));
     }
-    return types;
+    return stt::StrongTypeSet(types);
 }
 
 stt::StrongType YamlDeserializer::deserializeStrongType(YAML::Node node) {

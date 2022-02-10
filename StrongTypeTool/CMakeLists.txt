@@ -13,7 +13,7 @@ add_library(Entities
         src/Entities/StrongType.cpp
         src/Entities/StrongType.h
         src/Entities/UnaryOperation.cpp
-        src/Entities/UnaryOperation.h)
+        src/Entities/UnaryOperation.h src/Entities/StrongTypeSet.cpp src/Entities/StrongTypeSet.h)
 
 add_library(Deserializer
         src/Deserializer/YamlDeserializer.cpp

@@ -4,9 +4,9 @@
 
 #include "YamlSerializer.h"
 
-YAML::Node YamlSerializer::serialize(const std::vector<stt::StrongType>& strongTypes) {
+YAML::Node YamlSerializer::serialize(const stt::StrongTypeSet& strongTypeSet) {
     YAML::Node node;
-    for(const stt::StrongType& type : strongTypes) {
+    for(const stt::StrongType& type : strongTypeSet.getTypes()) {
         node["StrongTypes"].push_back(serializeStrongType(type));
     }
     return node;

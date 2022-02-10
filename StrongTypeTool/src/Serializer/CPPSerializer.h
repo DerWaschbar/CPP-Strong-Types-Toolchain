@@ -8,7 +8,7 @@
 
 #include <string>
 #include <vector>
-#include "../Entities/StrongType.h"
+#include "../Entities/StrongTypeSet.h"
 #include "TemplateManager.h"
 
 class CPPSerializer {
@@ -16,7 +16,7 @@ public:
     explicit CPPSerializer(TemplateManager templateManager) : templateManager(std::move(templateManager)) {}
     CPPSerializer() : CPPSerializer(TemplateManager()) {}
 public:
-    std::vector<std::string> serialize(const std::vector<stt::StrongType>& strongTypes);
+    std::vector<std::string> serialize(const stt::StrongTypeSet& strongTypeSet);
     std::string serializeStrongType(const stt::StrongType& strongType);
     std::string serializeBinaryOperation(const stt::BinaryOperation& binaryOperation);
     std::string serializeUnaryOperation(const stt::UnaryOperation& unaryOperation);

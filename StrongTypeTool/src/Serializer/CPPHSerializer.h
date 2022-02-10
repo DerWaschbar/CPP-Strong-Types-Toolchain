@@ -9,7 +9,7 @@
 #include <string>
 #include <utility>
 #include <vector>
-#include "../Entities/StrongType.h"
+#include "../Entities/StrongTypeSet.h"
 #include "TemplateManager.h"
 
 class CPPHSerializer {
@@ -17,7 +17,7 @@ public:
     explicit CPPHSerializer(TemplateManager templateManager) : templateManager(std::move(templateManager)) {}
     CPPHSerializer() : CPPHSerializer(TemplateManager()) {}
 public:
-    std::vector<std::string> serialize(const std::vector<stt::StrongType>& strongTypes);
+    std::vector<std::string> serialize(const stt::StrongTypeSet& strongTypeSet);
     std::string serializeStrongType(const stt::StrongType& strongType);
     std::string serializeBinaryOperation(const stt::BinaryOperation& binaryOperation);
     std::string serializeUnaryOperation(const stt::UnaryOperation& unaryOperation);

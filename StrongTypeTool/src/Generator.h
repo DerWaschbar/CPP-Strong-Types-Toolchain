@@ -7,7 +7,7 @@
 
 
 #include <boost/filesystem.hpp>
-#include "Entities/StrongType.h"
+#include "Entities/StrongTypeSet.h"
 
 class Generator {
     using path = boost::filesystem::path;
@@ -19,7 +19,7 @@ public:
     bool generate();
 
 private:
-    std::vector<stt::StrongType> loadConfiguration();
+    stt::StrongTypeSet loadConfiguration();
     bool generateStrongType(stt::StrongType type);
 
 private:

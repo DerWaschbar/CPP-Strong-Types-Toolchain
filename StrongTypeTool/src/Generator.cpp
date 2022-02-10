@@ -21,15 +21,15 @@ Generator::Generator(const path& configPath, const path& rootPath, bool isRootPa
 bool Generator::generate() {
     boost::filesystem::create_directory(rootPath);
 
-    std::vector<stt::StrongType> types = loadConfiguration();
-    for(stt::StrongType type : types) {
+    stt::StrongTypeSet typeSet = loadConfiguration();
+    for(stt::StrongType type : typeSet.getTypes()) {
         generateStrongType(type);
     }
 
     return true;
 }
 
-std::vector<stt::StrongType> Generator::loadConfiguration() {
+stt::StrongTypeSet Generator::loadConfiguration() {
     return YamlDeserializer::deserialize(configPath.string());
 }
 
