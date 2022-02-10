@@ -43,7 +43,9 @@ std::string CPPHSerializer::serializeBinaryOperation(const stt::BinaryOperation 
     opJson["arg"] = binaryOperation.getArgType();
     opJson["op"] = binaryOperation.getOperation();
 
-    return inja::render((&templateManager)->getTemplate(Template::T_BinaryOpHeader), opJson);
+    Template aTemplate = binaryOperation.isBinaryAssignment() ? Template::T_BinaryAssignmentOp : Template::T_BinaryOp;
+
+    return inja::render((&templateManager)->getTemplate(aTemplate), opJson);
 }
 
 std::string CPPHSerializer::serializeUnaryOperation(const stt::UnaryOperation &unaryOperation) {

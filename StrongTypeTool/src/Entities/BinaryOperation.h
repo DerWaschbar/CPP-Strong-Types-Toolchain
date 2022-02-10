@@ -19,6 +19,8 @@ namespace stt {
         const std::string &getArgType() const;
         const std::string &getResType() const;
 
+        bool isBinaryAssignment() const;
+
         BinaryOperation(std::string operation, std::string argType, std::string resType)
             : operation(std::move(operation)), argType(std::move(argType)), resType(std::move(resType)) {}
     };

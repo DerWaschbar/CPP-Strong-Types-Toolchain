@@ -15,3 +15,7 @@ const std::string &stt::BinaryOperation::getArgType() const {
 const std::string &stt::BinaryOperation::getResType() const {
     return resType;
 }
+
+bool stt::BinaryOperation::isBinaryAssignment() const {
+    return operation.size() == 2 && operation[0] != '=' && operation[1] == '=';
+}
