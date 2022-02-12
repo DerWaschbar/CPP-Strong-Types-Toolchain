@@ -1,5 +1,5 @@
 {{ res }}& {{ name }}::operator{{ op }}(const {{ arg }} &rhs) {
-    this->wrappedValue {{ op }} other.get();
+    this->wrappedValue {{ op }} rhs.get();
     return *this;
 }
 

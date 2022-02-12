@@ -10,7 +10,7 @@ class {{ name }} {
 public:
     using wrappedType = {{ wraps }};
 
-    explicit constexpr Velocity(wrappedType const& value) : wrappedValue(value) {}
+    explicit constexpr {{ name }}(wrappedType const& value) : wrappedValue(value) {}
 
     constexpr wrappedType& get() { return wrappedValue; }
     constexpr wrappedType get() const { return wrappedValue; }

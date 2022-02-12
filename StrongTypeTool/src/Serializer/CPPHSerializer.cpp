@@ -9,7 +9,7 @@
 #include <boost/algorithm/string.hpp>
 
 std::vector<std::string> CPPHSerializer::serialize(const stt::StrongTypeSet& strongTypeSet) {
-    std::vector<std::string> headers(strongTypeSet.getTypes().size());
+    std::vector<std::string> headers;
     for(const stt::StrongType& type : strongTypeSet.getTypes()) {
         headers.push_back(serializeStrongType(type, strongTypeSet.getDependencies(type)));
     }
