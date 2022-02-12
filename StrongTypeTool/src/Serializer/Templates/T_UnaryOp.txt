@@ -1,4 +1,4 @@
 {{ res }} {{ name }}::operator{{ op }}() const {
-    return {{ name }}{ {{ op }}(this->get()) };
+    return {{ res }}{ {{ op }}(this->get()) };
 }
 

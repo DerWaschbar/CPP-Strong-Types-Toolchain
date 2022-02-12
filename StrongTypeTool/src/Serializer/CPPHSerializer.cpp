@@ -21,7 +21,9 @@ std::string CPPHSerializer::serializeStrongType(const stt::StrongType &strongTyp
     for(const stt::BinaryOperation &op : strongType.getBinaryOperations()) {
         ops += serializeBinaryOperation(op);
     }
-    ops += "\n";
+
+    if(!strongType.getBinaryOperations().empty() && !strongType.getUnaryOperations().empty())
+        ops += "\n";
 
     for(const stt::UnaryOperation &op : strongType.getUnaryOperations()) {
         ops += serializeUnaryOperation(op);
@@ -43,7 +45,7 @@ std::string CPPHSerializer::serializeBinaryOperation(const stt::BinaryOperation 
     opJson["arg"] = binaryOperation.getArgType();
     opJson["op"] = binaryOperation.getOperation();
 
-    Template aTemplate = binaryOperation.isBinaryAssignment() ? Template::T_BinaryAssignmentOp : Template::T_BinaryOp;
+    Template aTemplate = binaryOperation.isBinaryAssignment() ? Template::T_BinaryAssignmentOpHeader : Template::T_BinaryOpHeader;
 
     return inja::render((&templateManager)->getTemplate(aTemplate), opJson);
 }

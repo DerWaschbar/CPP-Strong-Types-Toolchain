@@ -17,7 +17,6 @@ public:
 
 public:
 {{ ops }}
-
 private:
     wrappedType wrappedValue;
 };
