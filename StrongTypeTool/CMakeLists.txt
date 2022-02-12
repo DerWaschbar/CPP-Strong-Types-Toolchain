@@ -48,3 +48,6 @@ target_link_libraries(StrongTypeTool INTERFACE inja)
 
 find_package(Boost 1.71.0 COMPONENTS filesystem)
 target_link_libraries(StrongTypeTool PRIVATE Boost::filesystem)
+
+find_package(GTest REQUIRED)
+target_link_libraries(StrongTypeTool PRIVATE ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES})
