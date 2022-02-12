@@ -18,7 +18,7 @@ namespace stt {
         explicit StrongTypeSet(std::vector<stt::StrongType> types);
 
         std::vector<stt::StrongType> getTypes() const { return types; }
-        std::vector<stt::StrongType> getDependencies(const stt::StrongType& type);
+        std::vector<stt::StrongType> getDependencies(const stt::StrongType& type) const ;
 
     private:
         void buildDependencyGraph();

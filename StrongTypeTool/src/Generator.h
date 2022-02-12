@@ -20,7 +20,7 @@ public:
 
 private:
     stt::StrongTypeSet loadConfiguration();
-    bool generateStrongType(stt::StrongType type);
+    bool generateStrongType(const stt::StrongType& type, const std::vector<stt::StrongType>& dependencyList);
 
 private:
     path configPath, rootPath;

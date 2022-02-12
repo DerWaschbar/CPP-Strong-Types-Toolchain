@@ -23,7 +23,7 @@ bool Generator::generate() {
 
     stt::StrongTypeSet typeSet = loadConfiguration();
     for(stt::StrongType type : typeSet.getTypes()) {
-        generateStrongType(type);
+        generateStrongType(type, typeSet.getDependencies(type));
     }
 
     return true;
@@ -33,10 +33,10 @@ stt::StrongTypeSet Generator::loadConfiguration() {
     return YamlDeserializer::deserialize(configPath.string());
 }
 
-bool Generator::generateStrongType(stt::StrongType type) {
+bool Generator::generateStrongType(const stt::StrongType& type, const std::vector<stt::StrongType>& dependencyList) {
     CPPHSerializer cpphSerializer;
     const std::string headerFileName = type.getTypeName() + ".h";
-    const std::string headerText = cpphSerializer.serializeStrongType(type);
+    const std::string headerText = cpphSerializer.serializeStrongType(type, dependencyList);
 
     CPPSerializer cppSerializer;
     const std::string classFileName = type.getTypeName() + ".cpp";

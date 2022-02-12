@@ -18,9 +18,11 @@ public:
     CPPHSerializer() : CPPHSerializer(TemplateManager()) {}
 public:
     std::vector<std::string> serialize(const stt::StrongTypeSet& strongTypeSet);
-    std::string serializeStrongType(const stt::StrongType& strongType);
+    std::string serializeStrongType(const stt::StrongType& strongType, const std::vector<stt::StrongType> &includedTypes);
+private:
     std::string serializeBinaryOperation(const stt::BinaryOperation& binaryOperation);
     std::string serializeUnaryOperation(const stt::UnaryOperation& unaryOperation);
+    std::string serializeIncludes(const std::vector<stt::StrongType>& includedTypes);
 
 private:
     const TemplateManager templateManager;

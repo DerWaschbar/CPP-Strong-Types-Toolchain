@@ -18,8 +18,10 @@ stt::StrongTypeSet::StrongTypeSet(std::vector<stt::StrongType> types)
     this->resolveDependencies();
 }
 
-std::vector<stt::StrongType> stt::StrongTypeSet::getDependencies(const stt::StrongType& type) {
-    return this->dependencyList[type.getTypeName()];
+std::vector<stt::StrongType> stt::StrongTypeSet::getDependencies(const stt::StrongType& type) const {
+    if(this->dependencyList.find(type.getTypeName()) == this->dependencyList.end())
+        return {};
+    return this->dependencyList.at(type.getTypeName());
 }
 
 void stt::StrongTypeSet::buildDependencyGraph() {

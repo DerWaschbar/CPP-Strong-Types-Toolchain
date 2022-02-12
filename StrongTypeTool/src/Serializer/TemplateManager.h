@@ -17,7 +17,8 @@ enum class Template {
     T_UnaryOp,
     T_UnaryOpHeader,
     T_BinaryAssignmentOp,
-    T_BinaryAssignmentOpHeader
+    T_BinaryAssignmentOpHeader,
+    T_Include
 };
 
 class TemplateManager {

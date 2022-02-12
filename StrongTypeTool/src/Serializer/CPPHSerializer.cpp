@@ -11,12 +11,12 @@
 std::vector<std::string> CPPHSerializer::serialize(const stt::StrongTypeSet& strongTypeSet) {
     std::vector<std::string> headers(strongTypeSet.getTypes().size());
     for(const stt::StrongType& type : strongTypeSet.getTypes()) {
-        headers.push_back(serializeStrongType(type));
+        headers.push_back(serializeStrongType(type, strongTypeSet.getDependencies(type)));
     }
     return headers;
 }
 
-std::string CPPHSerializer::serializeStrongType(const stt::StrongType &strongType) {
+std::string CPPHSerializer::serializeStrongType(const stt::StrongType &strongType, const std::vector<stt::StrongType> &includedTypes) {
     std::string ops;
     for(const stt::BinaryOperation &op : strongType.getBinaryOperations()) {
         ops += serializeBinaryOperation(op);
@@ -35,6 +35,7 @@ std::string CPPHSerializer::serializeStrongType(const stt::StrongType &strongTyp
     type["NAME"] = boost::to_upper_copy<std::string>(strongType.getTypeName());
     type["wraps"] = strongType.getWraps();
     type["ops"] = ops;
+    type["includes"] = serializeIncludes(includedTypes);
 
     return inja::render((&templateManager)->getTemplate(Template::T_ClassHeader), type);
 }
@@ -56,4 +57,15 @@ std::string CPPHSerializer::serializeUnaryOperation(const stt::UnaryOperation &u
     opJson["op"] = unaryOperation.getOperation();
 
     return inja::render((&templateManager)->getTemplate(Template::T_UnaryOpHeader), opJson);
+}
+
+std::string CPPHSerializer::serializeIncludes(const std::vector<stt::StrongType>& includedTypes) {
+    std::string includes;
+
+    nlohmann::json includeData;
+    for(const stt::StrongType &type : includedTypes) {
+        includeData["include_path"] = type.getTypeName() + ".h";
+        includes += inja::render((&templateManager)->getTemplate(Template::T_Include), includeData);
+    }
+    return includes;
 }

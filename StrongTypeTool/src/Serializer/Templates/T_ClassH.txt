@@ -5,7 +5,7 @@
 #ifndef {{ NAME }}_H
 #define {{ NAME }}_H
 
-
+{{ includes }}
 class {{ name }} {
 public:
     using wrappedType = {{ wraps }};
