@@ -3,51 +3,8 @@ project(StrongTypeTool)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(StrongTypeTool main.cpp src/Generator.cpp src/Generator.h)
+add_executable(StrongTypeToolMain main.cpp)
 
+add_subdirectory(src)
+target_link_libraries(StrongTypeToolMain PUBLIC StrongTypeTool)
 
-# Libs
-add_library(Entities
-        src/Entities/BinaryOperation.cpp
-        src/Entities/BinaryOperation.h
-        src/Entities/StrongType.cpp
-        src/Entities/StrongType.h
-        src/Entities/UnaryOperation.cpp
-        src/Entities/UnaryOperation.h src/Entities/StrongTypeSet.cpp src/Entities/StrongTypeSet.h)
-
-add_library(Deserializer
-        src/Deserializer/YamlDeserializer.cpp
-        src/Deserializer/YamlDeserializer.h)
-
-add_library(Serializer
-        src/Serializer/YamlSerializer.cpp
-        src/Serializer/YamlSerializer.h
-        src/Serializer/CPPHSerializer.cpp
-        src/Serializer/CPPHSerializer.h
-        src/Serializer/CPPSerializer.cpp
-        src/Serializer/CPPSerializer.h
-        src/Serializer/TemplateManager.cpp
-        src/Serializer/TemplateManager.h)
-
-
-# Links
-target_link_libraries(Deserializer PUBLIC Entities)
-target_link_libraries(Serializer PUBLIC Entities)
-
-target_link_libraries(StrongTypeTool PUBLIC Entities)
-target_link_libraries(StrongTypeTool PUBLIC Deserializer)
-target_link_libraries(StrongTypeTool PUBLIC Serializer)
-
-
-# Dependencies
-find_package(yaml-cpp 0.6.0 REQUIRED)
-target_link_libraries(StrongTypeTool PRIVATE yaml-cpp)
-
-find_package(inja 3.3.0 REQUIRED)
-target_link_libraries(StrongTypeTool INTERFACE inja)
-
-find_package(Boost 1.71.0 COMPONENTS filesystem)
-target_link_libraries(StrongTypeTool PRIVATE Boost::filesystem)
-
-find_package(GTest REQUIRED)
-target_link_libraries(StrongTypeTool PRIVATE ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES})
