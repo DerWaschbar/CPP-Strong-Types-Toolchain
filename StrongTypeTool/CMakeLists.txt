@@ -8,3 +8,5 @@ add_executable(StrongTypeToolMain main.cpp)
 add_subdirectory(src)
 target_link_libraries(StrongTypeToolMain PUBLIC StrongTypeTool)
 
+enable_testing()
+add_subdirectory(tst)
