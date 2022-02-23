@@ -6,16 +6,14 @@
 
 #include "Entities/UnaryOperation.h"
 
-TEST(UnaryOperation, get)
+TEST(UnaryOperation, getOperation)
 {
     stt::UnaryOperation op("+", "float");
-
     EXPECT_EQ(op.getOperation(), "+");
 }
 
 TEST(UnaryOperation, getResType)
 {
     stt::UnaryOperation op("+", "float");
-
     EXPECT_EQ(op.getResType(), "float");
 }
