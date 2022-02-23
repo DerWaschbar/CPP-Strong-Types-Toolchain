@@ -4,16 +4,16 @@
 
 #include <gtest/gtest.h>
 
-#include "../../src/Entities/UnaryOperation.h"
+#include "Entities/UnaryOperation.h"
 
-TEST(UnaryOperation_test, get_operation)
+TEST(UnaryOperation, get)
 {
     stt::UnaryOperation op("+", "float");
 
     EXPECT_EQ(op.getOperation(), "+");
 }
 
-TEST(UnaryOperation_test, get_res_type)
+TEST(UnaryOperation, getResType)
 {
     stt::UnaryOperation op("+", "float");
 

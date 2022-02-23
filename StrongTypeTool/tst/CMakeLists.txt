@@ -1,6 +1,8 @@
 add_executable(StrongTypeToolTest Test.cpp
         Entities/UnaryOperationTest.cpp)
 
+target_include_directories(StrongTypeToolTest PRIVATE "../src")
+
 # Tests
 add_test(stt-test StrongTypeToolTest)
 

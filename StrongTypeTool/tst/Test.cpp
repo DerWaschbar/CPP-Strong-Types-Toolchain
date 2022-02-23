@@ -3,11 +3,8 @@
 //
 
 #include <gtest/gtest.h>
-#include <string>
 
 int main(int argc, char **argv) {
-
-    std::string filePath = "/home/waschbar/Desktop/Workspace/Thesis/CPP-Strong-Types-Toolchain/StrongTypeTool/outTest/test.yaml";
 
     testing::InitGoogleTest(&argc, argv);
 
