@@ -1,7 +1,0 @@
-StrongTypes:
-
-  - TypeName: "Distance"
-    Wraps: "float"
-
-  - TypeName: "Time"
-    Wraps: "int"
