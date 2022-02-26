@@ -26,8 +26,8 @@ namespace stt {
         const std::vector<stt::BinaryOperation> &getBinaryOperations() const;
         const std::vector<stt::UnaryOperation> &getUnaryOperations() const;
 
-        StrongType(std::string typeName, std::string wraps, std::vector<stt::BinaryOperation> binOps)
-            : typeName(std::move(typeName)), wraps(std::move(wraps)), binaryOperations(std::move(binOps)) {}
+        StrongType(std::string typeName, std::string wraps, std::vector<stt::BinaryOperation> binOps, std::vector<stt::UnaryOperation> unOps)
+            : typeName(std::move(typeName)), wraps(std::move(wraps)), binaryOperations(std::move(binOps)), unaryOperations(std::move(unOps)) {}
     public:
         class Builder {
         public:
