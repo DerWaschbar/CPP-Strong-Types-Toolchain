@@ -11,6 +11,7 @@ public:
     using wrappedType = {{ wraps }};
 
     explicit constexpr {{ name }}(wrappedType const& value) : wrappedValue(value) {}
+    explicit operator wrappedType() const { return  wrappedValue; }
 
     constexpr wrappedType& get() { return wrappedValue; }
     constexpr wrappedType get() const { return wrappedValue; }
