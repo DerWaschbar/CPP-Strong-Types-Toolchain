@@ -8,8 +8,23 @@
 #include "Deserializer/YamlDeserializer.h"
 
 TEST(YamlDeserializer, deserialize) {
-    const boost::filesystem::path filePath = boost::filesystem::current_path()
-            .parent_path().parent_path() / "tst" / "TestConfigurations" / "test-config-short.yaml";
+    const std::string configData = "StrongTypes:\n"
+                                   "\n"
+                                   "  - TypeName: \"Distance\"\n"
+                                   "    Wraps: \"float\"\n"
+                                   "\n"
+                                   "  - TypeName: \"Time\"\n"
+                                   "    Wraps: \"int\"";
+    const std::string testFileName = "stt-test-config.yaml";
+    const boost::filesystem::path filePath = boost::filesystem::current_path() / testFileName;
+
+    if(boost::filesystem::exists(filePath)) {
+        boost::filesystem::remove(filePath);
+    }
+    boost::filesystem::ofstream ofs(filePath);
+    ofs << configData;
+    ofs.close();
+
     stt::StrongTypeSet typeSet = YamlDeserializer::deserialize(filePath.string());
     ASSERT_EQ(typeSet.getTypes().size(), 2);
     ASSERT_EQ(typeSet.getTypes()[0].getTypeName(), "Distance");
