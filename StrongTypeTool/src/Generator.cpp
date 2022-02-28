@@ -7,6 +7,7 @@
 #include "Deserializer/YamlDeserializer.h"
 #include "Serializer/CPPHSerializer.h"
 #include "Serializer/CPPSerializer.h"
+#include "Serializer/CMakeListsSerializer.h"
 
 Generator::Generator(const path& configPath) : Generator(configPath, configPath.parent_path()) {}
 
@@ -20,8 +21,10 @@ Generator::Generator(const path& configPath, const path& rootPath, bool isRootPa
 
 bool Generator::generate() {
     boost::filesystem::create_directory(rootPath);
-
     stt::StrongTypeSet typeSet = loadConfiguration();
+
+    generateCMakeLists(typeSet);
+
     for(stt::StrongType type : typeSet.getTypes()) {
         generateStrongType(type, typeSet.getDependencies(type));
     }
@@ -46,6 +49,15 @@ bool Generator::generateStrongType(const stt::StrongType& type, const std::vecto
 
     boost::filesystem::ofstream(this->rootPath / headerFileName) << headerText;
     boost::filesystem::ofstream(this->rootPath / classFileName) << classText;
+
+    return true;
+}
+
+bool Generator::generateCMakeLists(const stt::StrongTypeSet &strongTypeSet) {
+    CMakeListsSerializer cMakeListSerializer;
+    const std::string cmake = cMakeListSerializer.serialize(strongTypeSet);
+
+    boost::filesystem::ofstream(this->rootPath / "CMakeLists.txt") << cmake;
 
     return true;
 }

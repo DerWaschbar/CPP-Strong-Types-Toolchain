@@ -25,7 +25,9 @@ add_library(Serializer
         Serializer/CPPSerializer.cpp
         Serializer/CPPSerializer.h
         Serializer/TemplateManager.cpp
-        Serializer/TemplateManager.h)
+        Serializer/TemplateManager.h
+        Serializer/CMakeListsSerializer.cpp
+        Serializer/CMakeListsSerializer.h)
 
 # Links
 target_link_libraries(Deserializer PUBLIC Entities)
