@@ -1,0 +1,27 @@
+//
+// Created by program.
+//
+
+#ifndef {{ NAME }}_H
+#define {{ NAME }}_H
+
+{{ includes }}
+class {{ name }} {
+public:
+    using wrappedType = {{ wraps }};
+
+    explicit constexpr {{ name }}(wrappedType const& value) : wrappedValue(value) {}
+    explicit operator wrappedType() const { return  wrappedValue; }
+
+    constexpr wrappedType& get() { return wrappedValue; }
+    constexpr wrappedType get() const { return wrappedValue; }
+
+public:
+{{ ops }}
+private:
+    wrappedType wrappedValue;
+};
+
+
+{{ op_definitions }}
+#endif //{{ NAME }}_H
