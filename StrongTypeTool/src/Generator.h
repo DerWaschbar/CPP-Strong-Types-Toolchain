@@ -16,12 +16,12 @@ public:
     Generator(const path& configPath, const path& rootPath, bool isRootPathRelative = false);
 
     bool validate();
-    bool generate();
+    bool generate(bool headerOnly = false);
 
 private:
     stt::StrongTypeSet loadConfiguration();
-    bool generateStrongType(const stt::StrongType& type, const std::vector<stt::StrongType>& dependencyList);
-    bool generateCMakeLists(const stt::StrongTypeSet& strongTypeSet);
+    bool generateStrongType(const stt::StrongType& type, const std::vector<stt::StrongType>& dependencyList, bool headerOnly);
+    bool generateCMakeLists(const stt::StrongTypeSet& strongTypeSet, bool headerOnly);
 
 private:
     path configPath, rootPath;
