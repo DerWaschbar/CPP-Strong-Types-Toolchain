@@ -12,6 +12,7 @@
 enum class Template {
     T_Class,
     T_ClassHeader,
+    T_ClassHeaderOnly,
     T_BinaryOp,
     T_BinaryOpHeader,
     T_UnaryOp,
