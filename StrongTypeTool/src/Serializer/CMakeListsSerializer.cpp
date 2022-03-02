@@ -4,12 +4,15 @@
 
 #include "CMakeListsSerializer.h"
 
-std::string CMakeListsSerializer::serialize(const stt::StrongTypeSet &strongTypeSet) {
+std::string CMakeListsSerializer::serialize(const stt::StrongTypeSet &strongTypeSet, bool headerOnly) {
     std::string cmake = "add_library(StrongTypes";
+    if(headerOnly)
+        cmake += " INTERFACE";
 
     for(const stt::StrongType& type : strongTypeSet.getTypes()) {
-        cmake += "\n\t\t" + type.getTypeName() + ".cpp"
-                 "\n\t\t" + type.getTypeName() + ".h";
+        if(!headerOnly)
+            cmake += "\n\t\t" + type.getTypeName() + ".cpp";
+        cmake += "\n\t\t" + type.getTypeName() + ".h";
     }
 
     cmake += ")";

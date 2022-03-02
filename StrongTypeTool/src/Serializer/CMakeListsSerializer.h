@@ -15,7 +15,7 @@ public:
     explicit CMakeListsSerializer() = default;
 
 public:
-    std::string serialize(const stt::StrongTypeSet& strongTypeSet);
+    std::string serialize(const stt::StrongTypeSet& strongTypeSet, bool headerOnly);
 };
 
 
