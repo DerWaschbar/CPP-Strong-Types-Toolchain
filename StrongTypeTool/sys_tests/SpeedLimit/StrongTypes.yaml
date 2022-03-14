@@ -1,0 +1,11 @@
+StrongTypes:
+
+  - TypeName: "Speed"
+    Wraps: "int"
+    BinaryOperations:
+      - Operation: "<="
+        ArgType: "Speed"
+        ResType: "bool"
+      - Operation: ">="
+        ArgType: "Speed"
+        ResType: "bool"

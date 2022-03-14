@@ -1,0 +1,8 @@
+StrongTypes:
+
+  - TypeName: "Distance"
+    Wraps: "float"
+    BinaryOperations:
+      - Operation: "+"
+        ArgType: "Distance"
+        ResType: "Distance"
