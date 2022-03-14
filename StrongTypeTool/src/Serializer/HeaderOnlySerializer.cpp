@@ -28,7 +28,7 @@ std::string HeaderOnlySerializer::serializeStrongType(const stt::StrongType &str
     std::string opDefinitions;
     for(const stt::BinaryOperation &op : strongType.getBinaryOperations()) {
         std::pair<std::string, std::string> res = serializeBinaryOperation(op);
-        ops += inja::render(res.first, type);
+        ops += "\tinline " + inja::render(res.first, type);
         opDefinitions += inja::render(res.second, type);
     }
 
@@ -37,7 +37,7 @@ std::string HeaderOnlySerializer::serializeStrongType(const stt::StrongType &str
 
     for(const stt::UnaryOperation &op : strongType.getUnaryOperations()) {
         std::pair<std::string, std::string> res = serializeUnaryOperation(op);
-        ops += inja::render(res.first, type);
+        ops += "\tinline " + inja::render(res.first, type);
         opDefinitions += inja::render(res.second, type);
     }
 
