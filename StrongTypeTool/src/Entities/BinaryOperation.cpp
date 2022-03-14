@@ -17,6 +17,15 @@ const std::string &stt::BinaryOperation::getResType() const {
 }
 
 bool stt::BinaryOperation::isBinaryAssignment() const {
-    return (operation.size() == 2 && operation[0] != '=' && operation[1] == '=')
-        || operation == "<<=" || operation == ">>=";
+    return operation == "="
+        || operation == "+="
+        || operation == "-="
+        || operation == "*="
+        || operation == "/="
+        || operation == "%="
+        || operation == "&="
+        || operation == "|="
+        || operation == "^="
+        || operation == "<<="
+        || operation == ">>=";
 }
