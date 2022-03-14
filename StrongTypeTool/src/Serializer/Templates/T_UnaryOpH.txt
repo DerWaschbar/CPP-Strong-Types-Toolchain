@@ -1,1 +1,1 @@
-    {{ res }} operator{{ op }}() const;
+{{ res }} operator{{ op }}() const;

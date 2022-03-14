@@ -19,14 +19,14 @@ std::vector<std::string> CPPHSerializer::serialize(const stt::StrongTypeSet& str
 std::string CPPHSerializer::serializeStrongType(const stt::StrongType &strongType, const std::vector<stt::StrongType> &includedTypes) {
     std::string ops;
     for(const stt::BinaryOperation &op : strongType.getBinaryOperations()) {
-        ops += serializeBinaryOperation(op);
+        ops += "\t" + serializeBinaryOperation(op);
     }
 
     if(!strongType.getBinaryOperations().empty() && !strongType.getUnaryOperations().empty())
         ops += "\n";
 
     for(const stt::UnaryOperation &op : strongType.getUnaryOperations()) {
-        ops += serializeUnaryOperation(op);
+        ops += "\t" + serializeUnaryOperation(op);
     }
 
 
