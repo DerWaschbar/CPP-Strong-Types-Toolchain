@@ -13,8 +13,9 @@
 Generator::Generator(const path& configPath) : Generator(configPath, configPath.parent_path()) {}
 
 Generator::Generator(const path& configPath, const path& rootPath, bool isRootPathRelative) {
-    if(!boost::filesystem::is_regular_file(configPath) || !boost::filesystem::is_directory(rootPath))
+    if(!boost::filesystem::is_regular_file(absolute(configPath))) {
         assert(false);
+    }
 
     this->configPath = configPath;
     this->rootPath = rootPath / "StrongTypes";
