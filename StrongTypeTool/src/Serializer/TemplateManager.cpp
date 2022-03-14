@@ -23,6 +23,6 @@ boost::filesystem::path getFileName(Template aTemplate) {
 std::string TemplateManager::getTemplate(Template aTemplate) const {
     const path fileName = getFileName(aTemplate);
     std::string templateString;
-    boost::filesystem::load_string_file(absolute((".." / templateDirPath / fileName)), templateString);
+    boost::filesystem::load_string_file(absolute((templateDirPath / fileName)), templateString);
     return templateString;
 }

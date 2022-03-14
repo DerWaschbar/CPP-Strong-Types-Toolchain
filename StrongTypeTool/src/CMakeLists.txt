@@ -31,6 +31,9 @@ add_library(Serializer
         Serializer/HeaderOnlySerializer.cpp
         Serializer/HeaderOnlySerializer.h)
 
+file(GLOB TEMPLATE_FILES "Serializer/Templates/*")
+file(COPY ${TEMPLATE_FILES} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/Templates/")
+
 # Links
 target_link_libraries(Deserializer PUBLIC Entities)
 target_link_libraries(Serializer PUBLIC Entities)
