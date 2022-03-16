@@ -10,25 +10,25 @@
 #include "Serializer/HeaderOnlySerializer.h"
 #include "Serializer/CMakeListsSerializer.h"
 
-Generator::Generator(const path& configPath) : Generator(configPath, configPath.parent_path()) {}
-
-Generator::Generator(const path& configPath, const path& rootPath, bool isRootPathRelative) {
+Generator::Generator(const path& configPath) {
     if(!boost::filesystem::is_regular_file(absolute(configPath))) {
         assert(false);
     }
 
     this->configPath = configPath;
-    this->rootPath = rootPath / "StrongTypes";
+    this->rootPath = configPath.parent_path() / "StrongTypes";
 }
 
-bool Generator::generate(bool headerOnly) {
-    boost::filesystem::create_directory(rootPath);
+bool Generator::generate(const Config& config) {
+    this->rootPath = config.getRootPath().value_or(configPath.parent_path()) / "StrongTypes";
+
+    boost::filesystem::create_directories(this->rootPath);
     stt::StrongTypeSet typeSet = loadConfiguration();
 
-    generateCMakeLists(typeSet, headerOnly);
+    generateCMakeLists(typeSet, config.isHeaderOnly());
 
     for(const stt::StrongType& type : typeSet.getTypes()) {
-        generateStrongType(type, typeSet.getDependencies(type), headerOnly);
+        generateStrongType(type, typeSet.getDependencies(type), config.isHeaderOnly());
     }
 
     return true;

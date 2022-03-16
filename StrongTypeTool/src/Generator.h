@@ -8,15 +8,15 @@
 
 #include <boost/filesystem.hpp>
 #include "Entities/StrongTypeSet.h"
+#include "Config.h"
 
 class Generator {
     using path = boost::filesystem::path;
 public:
     explicit Generator(const path& configPath);
-    Generator(const path& configPath, const path& rootPath, bool isRootPathRelative = false);
 
     bool validate();
-    bool generate(bool headerOnly = false);
+    bool generate(const Config& config);
 
 private:
     stt::StrongTypeSet loadConfiguration();
@@ -24,7 +24,8 @@ private:
     bool generateCMakeLists(const stt::StrongTypeSet& strongTypeSet, bool headerOnly);
 
 private:
-    path configPath, rootPath;
+    path configPath;
+    path rootPath;
 };
 
 
