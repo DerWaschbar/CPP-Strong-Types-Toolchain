@@ -42,7 +42,7 @@ namespace stt {
             Builder* setUniOps(std::vector<stt::UnaryOperation> unaryOperations);
             StrongType build() { return StrongType(*this); }
         };
-        StrongType(const Builder& builder);
+        explicit StrongType(const Builder& builder);
     };
 }
 
