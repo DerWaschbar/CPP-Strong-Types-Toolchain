@@ -1,7 +1,7 @@
 # Libs
 add_library(StrongTypeTool
         Generator.cpp
-        Generator.h)
+        Generator.h Config.cpp Config.h)
 
 add_library(Entities
         Entities/BinaryOperation.cpp
