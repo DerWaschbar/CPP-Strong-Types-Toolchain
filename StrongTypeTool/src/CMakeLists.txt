@@ -1,7 +1,12 @@
+# Exe
+add_executable(STGenerator
+        StrongTypeToolMain.cpp)
 # Libs
 add_library(StrongTypeTool
         Generator.cpp
-        Generator.h Config.cpp Config.h)
+        Generator.h
+        Config.cpp
+        Config.h)
 
 add_library(Entities
         Entities/BinaryOperation.cpp
@@ -42,6 +47,8 @@ target_link_libraries(StrongTypeTool PUBLIC Entities)
 target_link_libraries(StrongTypeTool PUBLIC Deserializer)
 target_link_libraries(StrongTypeTool PUBLIC Serializer)
 
+target_link_libraries(STGenerator PUBLIC StrongTypeTool)
+
 # Dependencies
 find_package(yaml-cpp 0.6.0 REQUIRED)
 target_link_libraries(StrongTypeTool PRIVATE yaml-cpp)
@@ -49,5 +56,7 @@ target_link_libraries(StrongTypeTool PRIVATE yaml-cpp)
 find_package(inja 3.3.0 REQUIRED)
 target_include_directories(StrongTypeTool INTERFACE inja)
 
-find_package(Boost 1.71.0 COMPONENTS filesystem)
-target_link_libraries(StrongTypeTool PRIVATE Boost::filesystem)
+find_package(Boost 1.71.0 COMPONENTS filesystem program_options)
+target_link_libraries(StrongTypeTool PRIVATE Boost::filesystem Boost::program_options)
+
+target_link_libraries(STGenerator PRIVATE Boost::filesystem Boost::program_options)
