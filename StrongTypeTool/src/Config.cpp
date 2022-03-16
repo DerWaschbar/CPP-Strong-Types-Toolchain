@@ -14,7 +14,12 @@ Config::Builder *Config::Builder::makeHeaderOnly() {
     return this;
 }
 
-Config::Builder *Config::Builder::setRootPath(const std::string& rootPath) {
-    this->sttRootPath = rootPath;
+Config::Builder *Config::Builder::setRootPath(const std::string& path) {
+    this->sttRootPath = path;
+    return this;
+}
+
+Config::Builder *Config::Builder::setTemplatesPath(const std::string &path) {
+    this->templatesPath = path;
     return this;
 }

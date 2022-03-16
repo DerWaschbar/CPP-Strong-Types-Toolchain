@@ -20,9 +20,11 @@ public:
     public:
         bool headerOnly = false;
         std::optional<boost::filesystem::path> sttRootPath = {};
+        std::optional<boost::filesystem::path> templatesPath = {};
 
         Builder* makeHeaderOnly();
-        Builder* setRootPath(const std::string& rootPath);
+        Builder* setRootPath(const std::string& path);
+        Builder* setTemplatesPath(const std::string& path);
         Config build() { return Config(*this); }
     };
     explicit Config(const Builder& builder);

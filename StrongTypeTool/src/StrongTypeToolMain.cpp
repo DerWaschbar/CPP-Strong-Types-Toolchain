@@ -34,7 +34,7 @@ Config::Builder getConfigBuilder(po::variables_map vm) {
     }
 
     if(vm.count("templates-path")) {
-//        builder.setTemplatesPath(vm["templates-path"].as<std::string>());
+        builder.setTemplatesPath(vm["templates-path"].as<std::string>());
     }
 
     return builder;
