@@ -14,6 +14,7 @@ using json = nlohmann::json;
 #include "src/Generator.h"
 #include "src/Serializer/TemplateManager.h"
 #include "src/Deserializer/YamlDeserializer.h"
+#include "src/Config.h"
 
 
 using namespace boost::filesystem;
@@ -24,10 +25,21 @@ void testSerialization(std::string filePath);
 
 
 int main(int argc, char **argv) {
-
     std::string filePath = "/home/waschbar/Desktop/Workspace/Thesis/CPP-Strong-Types-Toolchain/StrongTypeTool/outTest/test.yaml";
 
-    testSerialization(filePath);
+    if(argc >= 2) {
+        filePath = "/home/waschbar/Desktop/Workspace/Thesis/CPP-Strong-Types-Toolchain/StrongTypeTool/sys_tests/AverageVelocity/StrongTypes.yaml";
+        filePath = argv[1];
+    }
+
+    Config config = Config::Builder().makeHeaderOnly()->build();
+
+    Generator gen(filePath);
+    gen.generate(Config::Builder()
+        .setRootPath("/home/waschbar/Desktop/Workspace/Thesis/CPP-Strong-Types-Toolchain/StrongTypeTool/outTest/stt")
+        ->build());
+
+    std::cout << "OK" << std::endl;
 
     return 0;
 }
@@ -48,7 +60,7 @@ void test() {
 
 void testGeneration(std::string filePath) {
     Generator gen(filePath);
-    gen.generate();
+    gen.generate(Config::Builder().build());
 }
 
 void testSerialization(std::string filePath) {
