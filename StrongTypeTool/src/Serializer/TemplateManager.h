@@ -26,7 +26,7 @@ class TemplateManager {
     using path = boost::filesystem::path;
 public:
     explicit TemplateManager(path  templateDirPath) : templateDirPath(std::move(templateDirPath)) {}
-    TemplateManager() : TemplateManager("src/Templates") {}
+    TemplateManager() : TemplateManager("Templates") {}
 
     virtual std::string getTemplate(Template aTemplate) const;
 
