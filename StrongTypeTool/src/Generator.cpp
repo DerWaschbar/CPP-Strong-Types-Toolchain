@@ -19,7 +19,7 @@ Generator::Generator(const path& configPath) {
     this->rootPath = configPath.parent_path() / "StrongTypes";
 }
 
-bool Generator::generate(const Config& config) {
+bool Generator::generate(const GenerationConfig& config) {
     this->rootPath = config.getRootPath().value_or(configPath.parent_path()) / "StrongTypes";
 
     boost::filesystem::create_directories(this->rootPath);

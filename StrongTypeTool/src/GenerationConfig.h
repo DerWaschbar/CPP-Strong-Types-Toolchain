@@ -2,13 +2,13 @@
 // Created by waschbar on 16.03.22.
 //
 
-#ifndef STRONGTYPETOOL_CONFIG_H
-#define STRONGTYPETOOL_CONFIG_H
+#ifndef STRONGTYPETOOL_GENERATIONCONFIG_H
+#define STRONGTYPETOOL_GENERATIONCONFIG_H
 
 #include <boost/filesystem.hpp>
 #include <optional>
 
-class Config {
+class GenerationConfig {
 private:
     bool headerOnly;
     std::optional<boost::filesystem::path> sttRootPath{};
@@ -25,10 +25,10 @@ public:
         Builder* makeHeaderOnly();
         Builder* setRootPath(const std::string& path);
         Builder* setTemplatesPath(const std::string& path);
-        Config build() { return Config(*this); }
+        GenerationConfig build() { return GenerationConfig(*this); }
     };
-    explicit Config(const Builder& builder);
+    explicit GenerationConfig(const Builder& builder);
 };
 
 
-#endif //STRONGTYPETOOL_CONFIG_H
+#endif //STRONGTYPETOOL_GENERATIONCONFIG_H

@@ -8,7 +8,7 @@
 
 #include <boost/filesystem.hpp>
 #include "Entities/StrongTypeSet.h"
-#include "Config.h"
+#include "GenerationConfig.h"
 
 class Generator {
     using path = boost::filesystem::path;
@@ -16,7 +16,7 @@ public:
     explicit Generator(const path& configPath);
 
     bool validate();
-    bool generate(const Config& config);
+    bool generate(const GenerationConfig& config);
 
 private:
     stt::StrongTypeSet loadConfiguration();

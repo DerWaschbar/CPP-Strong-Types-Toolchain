@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <boost/program_options.hpp>
-#include "Config.h"
+#include "GenerationConfig.h"
 #include "Generator.h"
 
 namespace po = boost::program_options;
@@ -22,8 +22,8 @@ po::options_description initDescription() {
     return description;
 }
 
-Config::Builder getConfigBuilder(po::variables_map vm) {
-    Config::Builder builder = Config::Builder();
+GenerationConfig::Builder getConfigBuilder(po::variables_map vm) {
+    GenerationConfig::Builder builder = GenerationConfig::Builder();
 
     if(vm.count("header-only")) {
         builder.makeHeaderOnly();
@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
         return 0;
     }
 
-    Config::Builder configBuilder = getConfigBuilder(vm);
+    GenerationConfig::Builder configBuilder = getConfigBuilder(vm);
     Generator generator(vm["config-path"].as<std::string>());
 
     if(generator.generate(configBuilder.build())) {

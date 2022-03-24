@@ -16,8 +16,8 @@ add_library(StrongTypeTool STATIC
         "${lib_SOURCES}"
         Generator.cpp
         Generator.h
-        Config.cpp
-        Config.h)
+        GenerationConfig.cpp
+        GenerationConfig.h)
 
 # Dependencies
 find_package(yaml-cpp 0.6.0 REQUIRED)
