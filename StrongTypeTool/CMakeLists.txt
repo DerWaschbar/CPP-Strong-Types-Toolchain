@@ -3,10 +3,9 @@ project(StrongTypeTool)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(StrongTypeToolMain main.cpp)
+set(STT_NAME "StrongTypeTool")
 
 add_subdirectory(src)
-target_link_libraries(StrongTypeToolMain PUBLIC StrongTypeTool)
+add_subdirectory(tst)
 
 enable_testing()
-add_subdirectory(tst)

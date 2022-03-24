@@ -9,6 +9,8 @@
 #include <string>
 #include <utility>
 
+#include "Config.h"
+
 enum class Template {
     T_Class,
     T_ClassHeader,
@@ -26,7 +28,7 @@ class TemplateManager {
     using path = boost::filesystem::path;
 public:
     explicit TemplateManager(path  templateDirPath) : templateDirPath(std::move(templateDirPath)) {}
-    TemplateManager() : TemplateManager("Templates") {}
+    TemplateManager() : TemplateManager(path(RESOURCE_PATH) / "Templates") {}
 
     virtual std::string getTemplate(Template aTemplate) const;
 

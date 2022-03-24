@@ -1,6 +1,3 @@
-file(GLOB TEMPLATE_FILES "Serializer/Templates/*")
-file(COPY ${TEMPLATE_FILES} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/Templates/")
-
 list(APPEND lib_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/YamlSerializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/YamlSerializer.h

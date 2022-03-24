@@ -6,6 +6,7 @@
 #include <boost/program_options.hpp>
 #include "GenerationConfig.h"
 #include "Generator.h"
+#include "Config.h"
 
 namespace po = boost::program_options;
 
@@ -76,5 +77,7 @@ int main(int argc, char** argv) {
     else {
         std::cout << "Error: Can not generate strong types library!";
     }
+
+    std::cout << CMAKE_INSTALL_PREFIX << std::endl;
 }
 
