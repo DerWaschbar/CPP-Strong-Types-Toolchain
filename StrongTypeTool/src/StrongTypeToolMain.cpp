@@ -55,9 +55,6 @@ int main(int argc, char** argv) {
     po::notify(vm);
 
     if(vm.empty() || vm.count("help") || !vm.count("config-path")) {
-        std::cout << vm.empty()
-        << " " << vm.count("help")
-        << " " << vm.count("config-path") << std::endl;
         std::cout << description << std::endl;
         return 0;
     }
@@ -78,6 +75,5 @@ int main(int argc, char** argv) {
         std::cout << "Error: Can not generate strong types library!";
     }
 
-    std::cout << CMAKE_INSTALL_PREFIX << std::endl;
 }
 
