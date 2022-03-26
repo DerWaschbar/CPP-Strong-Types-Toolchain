@@ -1,0 +1,16 @@
+StrongTypes:
+
+  - TypeName: "Speed"
+    Wraps: "unsigned long long"
+    BinaryOperations:
+      - Operation: "<="
+        ArgType: "Speed"
+        ResType: "bool"
+      - Operation: ">="
+          ArgType: "Speed"
+          ResType: "bool"
+
+StrongLiterals:
+  - Suffix: "_kmh"
+    ArgType: "unsigned long long"
+    ResType: "Speed"
