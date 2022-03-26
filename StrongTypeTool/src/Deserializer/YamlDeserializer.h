@@ -14,6 +14,7 @@
 class YamlDeserializer {
 public:
     static stt::StrongTypeSet deserialize(const std::string& filePath);
+    static stt::StrongLiteral deserializeStrongLiteral(YAML::Node node);
     static stt::StrongType deserializeStrongType(YAML::Node node);
     static stt::BinaryOperation deserializeBinaryOperation(YAML::Node node);
     static stt::UnaryOperation deserializeUnaryOperation(YAML::Node node);
