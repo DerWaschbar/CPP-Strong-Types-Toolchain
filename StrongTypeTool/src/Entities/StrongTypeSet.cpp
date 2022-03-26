@@ -6,12 +6,17 @@
 
 #include <stack>
 #include <algorithm>
+#include <utility>
 
-stt::StrongTypeSet::StrongTypeSet(std::vector<stt::StrongType> types)
-    : types(std::move(types)) {
+stt::StrongTypeSet::StrongTypeSet(std::vector<stt::StrongType> types, std::vector<stt::StrongLiteral> literals)
+    : types(std::move(types)), literals(std::move(literals)) {
 
     for(stt::StrongType &type : this->types) {
         this->nameToType[type.getTypeName()] = &type;
+    }
+
+    for(stt::StrongLiteral &literal : this->literals) {
+        this->literalsDependency.insert(literal.getResType());
     }
 
     this->buildDependencyGraph();
