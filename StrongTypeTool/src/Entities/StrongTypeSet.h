@@ -19,6 +19,7 @@ namespace stt {
         explicit StrongTypeSet(std::vector<stt::StrongType> types, std::vector<stt::StrongLiteral> literals = {});
 
         std::vector<stt::StrongType> getTypes() const { return types; }
+        std::vector<stt::StrongLiteral> getLiterals() const { return literals; }
         std::vector<stt::StrongType> getDependencies(const stt::StrongType& type) const ;
         std::set<std::string> getLiteralsDependency() const { return literalsDependency; }
 
