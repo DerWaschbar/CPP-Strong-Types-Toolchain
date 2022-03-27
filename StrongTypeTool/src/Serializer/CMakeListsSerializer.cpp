@@ -9,6 +9,12 @@ std::string CMakeListsSerializer::serialize(const stt::StrongTypeSet &strongType
     if(headerOnly)
         cmake += " INTERFACE";
 
+    if(strongTypeSet.hasLiterals()) {
+        if(!headerOnly)
+            cmake += "\n\t\tStrongLiterals.cpp";
+        cmake += "\n\t\tStrongLiterals.h";
+    }
+
     for(const stt::StrongType& type : strongTypeSet.getTypes()) {
         if(!headerOnly)
             cmake += "\n\t\t" + type.getTypeName() + ".cpp";
