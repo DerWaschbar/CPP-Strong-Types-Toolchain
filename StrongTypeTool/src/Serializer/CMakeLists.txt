@@ -12,6 +12,10 @@ list(APPEND lib_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/HeaderOnlySerializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/HeaderOnlySerializer.h
         ${CMAKE_CURRENT_SOURCE_DIR}/LiteralHSerializer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/LiteralHSerializer.h)
+        ${CMAKE_CURRENT_SOURCE_DIR}/LiteralHSerializer.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/LiteralSerializer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/LiteralSerializer.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/LiteralHeaderOnlySerializer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/LiteralHeaderOnlySerializer.h)
 
 set(lib_SOURCES "${lib_SOURCES}" PARENT_SCOPE)
