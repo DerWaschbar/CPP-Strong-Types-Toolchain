@@ -18,6 +18,7 @@ boost::filesystem::path getFileName(Template aTemplate) {
         case Template::T_UnaryOpHeader: return "T_UnaryOpH.txt";
         case Template::T_Include: return "T_Include.txt";
         case Template::T_Literal: return "T_Literal.txt";
+        case Template::T_LiteralHeaderOnly:
         case Template::T_LiteralHeader: return "T_LiteralH.txt";
         case Template::T_LiteralOp: return "T_LiteralOp.txt";
         case Template::T_LiteralOpHeader: return "T_LiteralOpH.txt";

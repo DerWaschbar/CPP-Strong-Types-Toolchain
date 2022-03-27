@@ -24,6 +24,7 @@ enum class Template {
     T_Include,
     T_Literal,
     T_LiteralHeader,
+    T_LiteralHeaderOnly,
     T_LiteralOp,
     T_LiteralOpHeader
 };
