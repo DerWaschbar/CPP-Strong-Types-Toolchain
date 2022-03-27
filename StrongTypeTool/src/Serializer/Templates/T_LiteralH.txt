@@ -1,0 +1,11 @@
+//
+// Created by program.
+//
+
+#ifndef {{ NAME }}_H
+#define {{ NAME }}_H
+
+{{ includes }}
+{{ ops }}
+
+#endif //{{ NAME }}_H

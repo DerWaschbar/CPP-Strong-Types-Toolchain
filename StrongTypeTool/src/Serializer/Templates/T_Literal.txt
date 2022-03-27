@@ -1,0 +1,7 @@
+//
+// Created by program.
+//
+
+#include "{{ name }}.h"
+
+{{ ops }}

@@ -1,0 +1,3 @@
+{{ res }} operator""{{ suffix }}({{ arg }} value) {
+    return {{ res }}(value);
+}
