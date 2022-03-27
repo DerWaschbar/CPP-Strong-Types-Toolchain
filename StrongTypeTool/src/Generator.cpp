@@ -9,6 +9,9 @@
 #include "Serializer/CPPSerializer.h"
 #include "Serializer/HeaderOnlySerializer.h"
 #include "Serializer/CMakeListsSerializer.h"
+#include "Serializer/LiteralHeaderOnlySerializer.h"
+#include "Serializer/LiteralSerializer.h"
+#include "Serializer/LiteralHSerializer.h"
 
 Generator::Generator(const path& configPath) {
     if(!boost::filesystem::is_regular_file(absolute(configPath))) {
@@ -29,6 +32,10 @@ bool Generator::generate(const GenerationConfig& config) {
 
     for(const stt::StrongType& type : typeSet.getTypes()) {
         generateStrongType(type, typeSet.getDependencies(type), config.isHeaderOnly());
+    }
+
+    if(typeSet.hasLiterals()) {
+        generateStrongLiterals(typeSet, config.isHeaderOnly());
     }
 
     return true;
@@ -61,6 +68,29 @@ bool Generator::generateStrongType(const stt::StrongType& type, const std::vecto
         boost::filesystem::ofstream(this->rootPath / classFileName) << classText;
     }
 
+    return true;
+}
+
+bool Generator::generateStrongLiterals(const stt::StrongTypeSet& strongTypeSet, bool headerOnly) {
+    if(headerOnly) {
+        LiteralHeaderOnlySerializer serializer;
+        const std::string headerFileName = "StrongLiterals.h";
+        const std::string headerText = serializer.serialize(strongTypeSet)[0];
+
+        boost::filesystem::ofstream(this->rootPath / headerFileName) << headerText;
+    }
+    else {
+        LiteralSerializer serializer;
+        const std::string headerFileName = "StrongLiterals.h";
+        const std::string headerText = serializer.serialize(strongTypeSet)[0];
+
+        LiteralHSerializer hSerializer;
+        const std::string classFileName = "StrongLiterals.cpp";
+        const std::string classText = hSerializer.serialize(strongTypeSet)[0];
+
+        boost::filesystem::ofstream(this->rootPath / headerFileName) << headerText;
+        boost::filesystem::ofstream(this->rootPath / classFileName) << classText;
+    }
     return true;
 }
 

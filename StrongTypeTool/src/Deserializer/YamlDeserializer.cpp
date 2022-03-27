@@ -6,12 +6,26 @@
 
 stt::StrongTypeSet YamlDeserializer::deserialize(const std::string& filePath) {
     YAML::Node config = YAML::LoadFile(filePath);
+
     std::vector<stt::StrongType> types{};
     for(int i = 0; i < config["StrongTypes"].size(); i++) {
         types.push_back(deserializeStrongType(config["StrongTypes"][i]));
     }
-    return stt::StrongTypeSet(types);
+
+    std::vector<stt::StrongLiteral> literals{};
+    for(int i = 0; i < config["StrongLiterals"].size(); i++) {
+        literals.push_back(deserializeStrongLiteral(config["StrongLiterals"][i]));
+    }
+
+    return stt::StrongTypeSet(types, literals);
 }
+
+stt::StrongLiteral YamlDeserializer::deserializeStrongLiteral(YAML::Node node) {
+    return {node["Suffix"].as<std::string>(),
+            node["ArgType"].as<std::string>(),
+            node["ResType"].as<std::string>()};
+}
+
 
 stt::StrongType YamlDeserializer::deserializeStrongType(YAML::Node node) {
     stt::StrongType::Builder builder;

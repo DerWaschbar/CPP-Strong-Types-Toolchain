@@ -21,6 +21,7 @@ public:
 private:
     stt::StrongTypeSet loadConfiguration();
     bool generateStrongType(const stt::StrongType& type, const std::vector<stt::StrongType>& dependencyList, bool headerOnly);
+    bool generateStrongLiterals(const stt::StrongTypeSet& strongTypeSet, bool headerOnly);
     bool generateCMakeLists(const stt::StrongTypeSet& strongTypeSet, bool headerOnly);
 
 private:

@@ -6,6 +6,8 @@ list(APPEND lib_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/UnaryOperation.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/UnaryOperation.h
         ${CMAKE_CURRENT_SOURCE_DIR}/StrongTypeSet.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/StrongTypeSet.h)
+        ${CMAKE_CURRENT_SOURCE_DIR}/StrongTypeSet.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/StrongLiteral.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/StrongLiteral.h)
 
 set(lib_SOURCES "${lib_SOURCES}" PARENT_SCOPE)
