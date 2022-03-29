@@ -19,6 +19,7 @@ set(lib_SOURCES)
 add_subdirectory(Entities)
 add_subdirectory(Deserializer)
 add_subdirectory(Serializer)
+add_subdirectory(Validation)
 
 add_library(StrongTypeTool STATIC
         "${lib_SOURCES}"
