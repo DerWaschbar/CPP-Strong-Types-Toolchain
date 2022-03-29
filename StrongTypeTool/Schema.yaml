@@ -1,0 +1,23 @@
+StrongTypes: list(include('StrongType'))
+StrongLiterals: list(include('StrongLiteral'), required=False)
+
+---
+StrongType:
+  TypeName: str()
+  Wraps: str()
+  BinaryOperations: list(include('BinaryOperation'), required=False)
+  UnaryOperations: list(include('UnaryOperation'), required=False)
+
+BinaryOperation:
+  Operation: str()
+  ArgType: str()
+  ResType: str()
+
+UnaryOperation:
+  Operation: str()
+  ResType: str()
+
+StrongLiteral:
+  Suffix: str()
+  ArgType: str()
+  ResType: str()
