@@ -6,7 +6,8 @@
 #include <boost/program_options.hpp>
 #include "GenerationConfig.h"
 #include "Generator.h"
-#include "Config.h"
+
+#include "Validation/Validator.h"
 
 namespace po = boost::program_options;
 
@@ -15,6 +16,7 @@ po::options_description initDescription() {
 
     description.add_options()
             ("help,h", "Display this help message")
+            ("validate,v", "Validate strong type configuration")
             ("header-only", "Generated header only library")
             ("root-path", po::value<std::string>(), "Path for StrongTypes folder to be generated in")
             ("templates-path", po::value<std::string>(), "Path for Template directory")
@@ -41,6 +43,21 @@ GenerationConfig::Builder getConfigBuilder(po::variables_map vm) {
     return builder;
 }
 
+void validate(const std::string& fileName) {
+    Validator validator;
+    std::vector<ValidationResult> results = validator.validate(fileName);
+
+    if(results.empty()) {
+        std::cout << "YAML configuration satisfies all validation rules.\n";
+        return;
+    }
+
+    std::cout << "YAML configuration does not satisfy all validation rules: \n\n";
+    for(const ValidationResult& result : results) {
+        std::cout << result.getResult() << "\n\n";
+    }
+}
+
 int main(int argc, char** argv) {
     po::options_description description = initDescription();
 
@@ -56,6 +73,11 @@ int main(int argc, char** argv) {
 
     if(vm.empty() || vm.count("help") || !vm.count("config-path")) {
         std::cout << description << std::endl;
+        return 0;
+    }
+
+    if(vm.count("validate")) {
+        validate(vm["config-path"].as<std::string>());
         return 0;
     }
 

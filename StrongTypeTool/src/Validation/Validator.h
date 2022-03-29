@@ -8,20 +8,31 @@
 #include <utility>
 #include <vector>
 #include "ValidationRule.h"
+#include "Rules/BinaryAssignmentTypeRule.h"
+#include "Rules/EmptyFieldsRule.h"
+#include "Rules/LiteralsArgTypeRule.h"
+#include "Rules/LiteralsResTypeRule.h"
 
 class Validator {
 public:
-    Validator() = default;
-    explicit Validator(std::vector<ValidationRule*> rules) : rules(std::move(rules)) {}
+    explicit Validator(std::vector<ValidationRule*> rules = Validator::basicValidationRules) : rules(std::move(rules)) {}
 
     void addRule(ValidationRule* rule) { rules.push_back(rule); }
     std::vector<ValidationRule*> getRules() const { return rules; }
 
     std::vector<ValidationResult> validate(const stt::StrongTypeSet& typeSet);
+    std::vector<ValidationResult> validate(const std::string& configPath);
+
+public:
+    inline static const std::vector<ValidationRule*> basicValidationRules = {
+            new BinaryAssignmentTypeRule(),
+            new EmptyFieldsRule(),
+            new LiteralsArgTypeRule(),
+            new LiteralsResTypeRule()
+    };
 
 private:
     std::vector<ValidationRule*> rules;
 };
-
 
 #endif //STRONGTYPETOOL_VALIDATOR_H

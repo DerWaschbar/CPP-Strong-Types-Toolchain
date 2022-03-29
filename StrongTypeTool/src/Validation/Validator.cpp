@@ -4,6 +4,8 @@
 
 #include "Validator.h"
 
+#include "../Deserializer/YamlDeserializer.h"
+
 std::vector<ValidationResult> Validator::validate(const stt::StrongTypeSet& typeSet) {
     std::vector<ValidationResult> vResults;
 
@@ -15,4 +17,8 @@ std::vector<ValidationResult> Validator::validate(const stt::StrongTypeSet& type
     }
 
     return vResults;
+}
+
+std::vector<ValidationResult> Validator::validate(const std::string& configPath) {
+    return validate(YamlDeserializer::deserialize(configPath));
 }
