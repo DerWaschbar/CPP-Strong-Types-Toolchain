@@ -41,7 +41,6 @@ TEST(YamlDeserializer, deserializeStrongType) {
     stt::StrongType type = YamlDeserializer::deserializeStrongType(node);
     ASSERT_EQ(type.getTypeName(), "StrongType");
     ASSERT_EQ(type.getWraps(), "int");
-    /// TODO: Check collections.
 }
 
 TEST(YamlDeserializer, deserializeBinaryOperation) {
@@ -64,4 +63,16 @@ TEST(YamlDeserializer, deserializeUnaryOperation) {
     stt::UnaryOperation op = YamlDeserializer::deserializeUnaryOperation(node);
     ASSERT_EQ(op.getOperation(), "+");
     ASSERT_EQ(op.getResType(), "int");
+}
+
+TEST(YamlDeserializer, deserializeStrongLiteral) {
+    YAML::Node node;
+    node["Suffix"] = "_tst";
+    node["ResType"] = "ST";
+    node["ArgType"] = "int";
+
+    stt::StrongLiteral literal = YamlDeserializer::deserializeStrongLiteral(node);
+    ASSERT_EQ(literal.getSuffix(), "_tst");
+    ASSERT_EQ(literal.getResType(), "ST");
+    ASSERT_EQ(literal.getArgType(), "int");
 }

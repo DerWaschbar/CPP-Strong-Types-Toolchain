@@ -16,14 +16,32 @@ TEST(StrongType, getWraps) {
     ASSERT_EQ(type.getWraps(), "WrappedType");
 }
 
-TEST(StrongType, getUnaryOperations) {
+TEST(StrongType, getUnaryOperations_0e) {
     stt::StrongType type("TT", "WT", {}, {});
     ASSERT_EQ(type.getUnaryOperations().size(), 0);
-    /// TODO: Add non-empty collection check.
+}
+
+TEST(StrongType, getUnaryOperations_1e) {
+    stt::StrongType type("TT", "WT", {},
+                         {stt::UnaryOperation("+", "int")});
+    std::vector<stt::UnaryOperation> uOps = type.getUnaryOperations();
+    ASSERT_EQ(uOps.size(), 1);
+    ASSERT_EQ(uOps[0].getOperation(), "+");
+    ASSERT_EQ(uOps[0].getResType(), "int");
 }
 
 TEST(StrongType, getBinaryOperations) {
     stt::StrongType type("TT", "WT", {}, {});
     ASSERT_EQ(type.getBinaryOperations().size(), 0);
-    /// TODO: Add non-empty collection check.
+}
+
+TEST(StrongType, getBinaryOperations_1e) {
+    stt::StrongType type("TT", "WT",
+                         {stt::BinaryOperation("+", "int", "TT")},
+                         {});
+    std::vector<stt::BinaryOperation> bOps = type.getBinaryOperations();
+    ASSERT_EQ(bOps.size(), 1);
+    ASSERT_EQ(bOps[0].getOperation(), "+");
+    ASSERT_EQ(bOps[0].getArgType(), "int");
+    ASSERT_EQ(bOps[0].getResType(), "TT");
 }
