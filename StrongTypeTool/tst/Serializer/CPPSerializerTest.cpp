@@ -5,13 +5,13 @@
 #include <gtest/gtest.h>
 
 #include "Entities/StrongTypeSet.h"
-#include "Serializer/CPPSerializerTest.h"
+#include "Serializer/CPPSerializer.h"
 
-TEST(CPPSerializerTest, serialize_StrongTypeSet1) {
+TEST(CPPSerializer, serialize_StrongTypeSet1) {
     stt::StrongType T1("TestType", "WT", {}, {});
     stt::StrongTypeSet typeSet({T1}, {});
 
-    CPPSerializerTest serializer;
+    CPPSerializer serializer;
 
     std::vector<std::string> data = serializer.serialize(typeSet);
     ASSERT_EQ(data.size(), 1);
@@ -23,13 +23,13 @@ TEST(CPPSerializerTest, serialize_StrongTypeSet1) {
                        "\n");
 }
 
-TEST(CPPSerializerTest, serialize_StrongTypeSet2) {
+TEST(CPPSerializer, serialize_StrongTypeSet2) {
     stt::StrongType T1("TestType", "int",
                        {stt::BinaryOperation("+", "int", "int")},
                        {stt::UnaryOperation("-", "int")});
     stt::StrongTypeSet typeSet({T1}, {});
 
-    CPPSerializerTest serializer;
+    CPPSerializer serializer;
 
     std::vector<std::string> data = serializer.serialize(typeSet);
     ASSERT_EQ(data.size(), 1);
@@ -49,10 +49,10 @@ TEST(CPPSerializerTest, serialize_StrongTypeSet2) {
                        "\n");
 }
 
-TEST(CPPSerializerTest, serialize_Empty) {
+TEST(CPPSerializer, serialize_Empty) {
     stt::StrongTypeSet typeSet({}, {});
 
-    CPPSerializerTest serializer;
+    CPPSerializer serializer;
 
     ASSERT_EQ(serializer.serialize(typeSet).size(), 0);
 }
