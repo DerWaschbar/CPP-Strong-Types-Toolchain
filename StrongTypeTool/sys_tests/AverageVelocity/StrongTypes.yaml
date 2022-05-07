@@ -6,11 +6,14 @@ StrongTypes:
       - Operation: "/"
         ArgType: "Time"
         ResType: "Velocity"
+      - Operation: "+"
+        ArgType: "Velocity"
+        ResType: "Velocity"
+      - Operation: "+="
+        ArgType: "Velocity"
+        ResType: "Velocity"
 
   - TypeName: "Time"
-    Wraps: "float"
-
-  - TypeName: "Velocity"
     Wraps: "float"
     BinaryOperations:
       - Operation: "+"
@@ -19,6 +22,6 @@ StrongTypes:
       - Operation: "+="
         ArgType: "Velocity"
         ResType: "Velocity"
-      - Operation: "/"
-        ArgType: "float"
-        ResType: "Velocity"
+
+  - TypeName: "Speed"
+    Wraps: "float"
