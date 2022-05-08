@@ -33,7 +33,7 @@ find_package(yaml-cpp 0.6.0 REQUIRED)
 target_link_libraries(StrongTypeTool PRIVATE yaml-cpp)
 
 find_package(inja 3.3.0 REQUIRED)
-target_include_directories(StrongTypeTool INTERFACE inja)
+target_include_directories(StrongTypeTool SYSTEM PUBLIC inja)
 
 find_package(Boost 1.71.0 COMPONENTS filesystem program_options)
 target_link_libraries(StrongTypeTool PRIVATE Boost::filesystem Boost::program_options)

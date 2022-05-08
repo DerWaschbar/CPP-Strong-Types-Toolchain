@@ -12,15 +12,18 @@
 namespace po = boost::program_options;
 
 po::options_description initDescription() {
-    po::options_description description("Usage");
+    po::options_description description("Usage: STGenerator <config file> [options] \n Options");
 
     description.add_options()
             ("help,h", "Display this help message")
-            ("validate,v", "Validate strong type configuration")
+            ("validate", "Validate strong type configuration")
+            ("skip-validation", "Generate without validating configuration")
+            ("validation-output, vout", po::value<std::string>(), "Directory path for validation output")
             ("header-only", "Generated header only library")
-            ("root-path", po::value<std::string>(), "Path for StrongTypes folder to be generated in")
+            ("root-path", po::value<std::string>(), "Directory path for StrongTypes folder to be generated in")
             ("templates-path", po::value<std::string>(), "Path for Template directory")
-            ("config-path", po::value<std::string>());
+            ("config-path", po::value<std::string>(), "Configuration file path")
+            ;
 
     return description;
 }
@@ -40,6 +43,14 @@ GenerationConfig::Builder getConfigBuilder(po::variables_map vm) {
         builder.setTemplatesPath(vm["templates-path"].as<std::string>());
     }
 
+    if(vm.count("skip-validation")) {
+        builder.disableValidation();
+    }
+
+    if(vm.count("validation-output")) {
+        builder.setValidationOutPath(vm["validation-output"].as<std::string>());
+    }
+
     return builder;
 }
 
@@ -52,9 +63,11 @@ void validate(const std::string& fileName) {
         return;
     }
 
-    std::cout << "YAML configuration does not satisfy all validation rules: \n\n";
+    std::cout << "YAML configuration violates part or all of the validation rules: \n\n";
     for(const ValidationResult& result : results) {
-        std::cout << result.getResult() << "\n\n";
+        std::cout
+            << (result.isError() ? "Error: " : "Warning: ")
+            << result.getResult() << "\n\n";
     }
 }
 

@@ -23,3 +23,18 @@ GenerationConfig::Builder *GenerationConfig::Builder::setTemplatesPath(const std
     this->templatesPath = path;
     return this;
 }
+
+GenerationConfig::Builder *GenerationConfig::Builder::setValidationOutPath(const std::string &path) {
+    this->validationOut = path;
+    return this;
+}
+
+GenerationConfig::Builder *GenerationConfig::Builder::enableValidation() {
+    this->validate = true;
+    return this;
+}
+
+GenerationConfig::Builder *GenerationConfig::Builder::disableValidation() {
+    this->validate = false;
+    return this;
+}
