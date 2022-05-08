@@ -12,6 +12,7 @@
 #include "Rules/EmptyFieldsRule.h"
 #include "Rules/LiteralsArgTypeRule.h"
 #include "Rules/LiteralsResTypeRule.h"
+#include "../Deserializer/YamlDeserializer.h"
 
 class Validator {
 public:
@@ -33,6 +34,7 @@ public:
 
 private:
     std::vector<ValidationRule*> rules;
+    YamlDeserializer deserializer;
 };
 
 #endif //STRONGTYPETOOL_VALIDATOR_H

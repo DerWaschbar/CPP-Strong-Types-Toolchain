@@ -20,5 +20,5 @@ std::vector<ValidationResult> Validator::validate(const stt::StrongTypeSet& type
 }
 
 std::vector<ValidationResult> Validator::validate(const std::string& configPath) {
-    return validate(YamlDeserializer::deserialize(configPath));
+    return validate(this->deserializer.deserialize(configPath));
 }

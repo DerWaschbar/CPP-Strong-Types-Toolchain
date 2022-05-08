@@ -54,7 +54,7 @@ bool Generator::generate(const GenerationConfig& config) {
 }
 
 stt::StrongTypeSet Generator::loadConfiguration() {
-    return YamlDeserializer::deserialize(configPath.string());
+    return this->deserializer.deserialize(configPath.string());
 }
 
 bool Generator::generateStrongType(const stt::StrongType& type, const std::vector<stt::StrongType>& dependencyList, const GenerationConfig& config) {

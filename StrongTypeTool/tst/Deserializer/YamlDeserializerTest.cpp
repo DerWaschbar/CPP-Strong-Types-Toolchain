@@ -25,7 +25,7 @@ TEST(YamlDeserializer, deserialize) {
     ofs << configData;
     ofs.close();
 
-    stt::StrongTypeSet typeSet = YamlDeserializer::deserialize(filePath.string());
+    stt::StrongTypeSet typeSet = YamlDeserializer().deserialize(filePath.string());
     ASSERT_EQ(typeSet.getTypes().size(), 2);
     ASSERT_EQ(typeSet.getTypes()[0].getTypeName(), "Distance");
     ASSERT_EQ(typeSet.getTypes()[0].getWraps(), "float");
@@ -38,7 +38,7 @@ TEST(YamlDeserializer, deserializeStrongType) {
     node["TypeName"] = "StrongType";
     node["Wraps"] = "int";
 
-    stt::StrongType type = YamlDeserializer::deserializeStrongType(node);
+    stt::StrongType type = YamlDeserializer().deserializeStrongType(node);
     ASSERT_EQ(type.getTypeName(), "StrongType");
     ASSERT_EQ(type.getWraps(), "int");
 }
@@ -49,7 +49,7 @@ TEST(YamlDeserializer, deserializeBinaryOperation) {
     node["ArgType"] = "float";
     node["ResType"] = "int";
 
-    stt::BinaryOperation op = YamlDeserializer::deserializeBinaryOperation(node);
+    stt::BinaryOperation op = YamlDeserializer().deserializeBinaryOperation(node);
     ASSERT_EQ(op.getOperation(), "+");
     ASSERT_EQ(op.getArgType(), "float");
     ASSERT_EQ(op.getResType(), "int");
@@ -60,7 +60,7 @@ TEST(YamlDeserializer, deserializeUnaryOperation) {
     node["Operation"] = "+";
     node["ResType"] = "int";
 
-    stt::UnaryOperation op = YamlDeserializer::deserializeUnaryOperation(node);
+    stt::UnaryOperation op = YamlDeserializer().deserializeUnaryOperation(node);
     ASSERT_EQ(op.getOperation(), "+");
     ASSERT_EQ(op.getResType(), "int");
 }
@@ -71,7 +71,7 @@ TEST(YamlDeserializer, deserializeStrongLiteral) {
     node["ResType"] = "ST";
     node["ArgType"] = "int";
 
-    stt::StrongLiteral literal = YamlDeserializer::deserializeStrongLiteral(node);
+    stt::StrongLiteral literal = YamlDeserializer().deserializeStrongLiteral(node);
     ASSERT_EQ(literal.getSuffix(), "_tst");
     ASSERT_EQ(literal.getResType(), "ST");
     ASSERT_EQ(literal.getArgType(), "int");

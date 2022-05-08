@@ -9,17 +9,16 @@
 #include <vector>
 #include "yaml-cpp/yaml.h"
 
-#include "../Entities/StrongTypeSet.h"
+#include "Deserializer.h"
 
-class YamlDeserializer {
+class YamlDeserializer : public Deserializer {
 public:
-    static stt::StrongTypeSet deserialize(const std::string& filePath);
-    static stt::StrongLiteral deserializeStrongLiteral(YAML::Node node);
-    static stt::StrongType deserializeStrongType(YAML::Node node);
-    static stt::BinaryOperation deserializeBinaryOperation(YAML::Node node);
-    static stt::UnaryOperation deserializeUnaryOperation(YAML::Node node);
-private:
-    YamlDeserializer() = default;
+    stt::StrongTypeSet deserialize(const std::string& filePath) override;
+
+    stt::StrongLiteral deserializeStrongLiteral(YAML::Node node);
+    stt::StrongType deserializeStrongType(YAML::Node node);
+    stt::BinaryOperation deserializeBinaryOperation(YAML::Node node);
+    stt::UnaryOperation deserializeUnaryOperation(YAML::Node node);
 };
 
 

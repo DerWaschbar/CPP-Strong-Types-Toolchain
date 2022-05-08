@@ -11,6 +11,7 @@
 #include "Entities/StrongTypeSet.h"
 #include "GenerationConfig.h"
 #include "Validation/Validator.h"
+#include "Deserializer/YamlDeserializer.h"
 
 class Generator {
     using path = boost::filesystem::path;
@@ -29,6 +30,7 @@ private:
     path configPath;
     path rootPath;
     Validator validator;
+    YamlDeserializer deserializer;
 };
 
 
