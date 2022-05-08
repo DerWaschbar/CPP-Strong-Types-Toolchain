@@ -16,9 +16,11 @@
 
 class Validator {
 public:
-    explicit Validator(std::vector<ValidationRule*> rules = Validator::basicValidationRules) : rules(std::move(rules)) {}
+    explicit Validator(std::vector<ValidationRule*> rules = Validator::basicValidationRules)
+        : rules(std::move(rules)) {}
 
     void addRule(ValidationRule* rule) { rules.push_back(rule); }
+    void setDeserializer(Deserializer* otherDeserializer) { this->deserializer = otherDeserializer; }
     std::vector<ValidationRule*> getRules() const { return rules; }
 
     std::vector<ValidationResult> validate(const stt::StrongTypeSet& typeSet);
@@ -34,7 +36,7 @@ public:
 
 private:
     std::vector<ValidationRule*> rules;
-    YamlDeserializer deserializer;
+    std::optional<Deserializer*> deserializer = {};
 };
 
 #endif //STRONGTYPETOOL_VALIDATOR_H

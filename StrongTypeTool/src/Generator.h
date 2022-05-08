@@ -18,6 +18,7 @@ class Generator {
 public:
     explicit Generator(const path& configPath, const Validator& validator = Validator());
     bool generate(const GenerationConfig& config);
+    void setDeserializer(Deserializer* otherDeserializer) { this->deserializer = otherDeserializer; }
 
 private:
     stt::StrongTypeSet loadConfiguration();
@@ -30,7 +31,7 @@ private:
     path configPath;
     path rootPath;
     Validator validator;
-    YamlDeserializer deserializer;
+    std::optional<Deserializer*> deserializer = {};
 };
 
 
