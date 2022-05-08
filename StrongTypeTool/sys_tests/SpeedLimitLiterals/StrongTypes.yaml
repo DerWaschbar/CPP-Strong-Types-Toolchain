@@ -7,8 +7,8 @@ StrongTypes:
         ArgType: "Speed"
         ResType: "bool"
       - Operation: ">="
-          ArgType: "Speed"
-          ResType: "bool"
+        ArgType: "Speed"
+        ResType: "bool"
 
 StrongLiterals:
   - Suffix: "_kmh"
