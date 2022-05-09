@@ -52,15 +52,11 @@ jobs:
            sudo make && sudo make install && sudo ldconfig            
     
     - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cd StrongTypeTool && cmake -B ${{github.workspace}}/StrongTypeTool/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cd StrongTypeTool && mkdir build && cd build && cmake .. -DCMAKE_INSTALL_PREFIX="$(readlink -f ../install)"
 
     - name: Build
-      # Build your program with the given configuration
-      run: cd StrongTypeTool && cmake --build ${{github.workspace}}/StrongTypeTool/build --config ${{env.BUILD_TYPE}}
+      run: cd StrongTypeTool/build && make install
 
     - name: Test
-      working-directory: ${{github.workspace}}/StrongTypeTool/build
-      run: ${{github.workspace}}/StrongTypeTool/build/tst/StrongTypeToolTest
+      run: cd StrongTypeTool/build && make StrongTypeToolTest && ./tst/StrongTypeToolTest
       
