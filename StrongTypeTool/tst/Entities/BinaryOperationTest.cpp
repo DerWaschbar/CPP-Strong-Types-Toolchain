@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 23.02.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 23.02.22.
 //
 
 #include <gtest/gtest.h>

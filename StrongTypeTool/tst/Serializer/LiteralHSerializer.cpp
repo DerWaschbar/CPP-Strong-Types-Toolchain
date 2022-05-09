@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 5/7/22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 5/7/22.
 //
 
 #include <gtest/gtest.h>
@@ -50,5 +50,3 @@ TEST(LiteralHSerializer, serialize_Empty) {
                        "\n"
                        "#endif //STRONGLITERALS_H");
 }
-
-

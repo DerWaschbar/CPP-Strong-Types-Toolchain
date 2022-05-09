@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 5/8/22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 5/8/22.
 //
 
 #ifndef STRONGTYPETOOL_DESERIALIZER_H
@@ -13,4 +13,4 @@ public:
 };
 
 
-#endif //STRONGTYPETOOL_DESERIALIZER_H
+#endif//STRONGTYPETOOL_DESERIALIZER_H

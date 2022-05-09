@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 29.03.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 29.03.22.
 //
 
 #ifndef STRONGTYPETOOL_VALIDATIONRESULT_H
@@ -8,20 +8,18 @@
 #include <string>
 #include <utility>
 
-enum class ValidationResultType {
-    Warning,
-    Error
-};
+enum class ValidationResultType { Warning, Error };
 
 class ValidationResult {
 public:
-    explicit ValidationResult(std::string result, ValidationResultType type = ValidationResultType::Error)
+    explicit ValidationResult(std::string result,
+                              ValidationResultType type = ValidationResultType::Error)
         : result(std::move(result)), type(type) {}
 
-    const std::string &getResult() const { return result; }
+    const std::string& getResult() const { return result; }
     ValidationResultType getType() const { return type; }
     bool isWarning() const { return type == ValidationResultType::Warning; }
-    bool isError() const {return type == ValidationResultType::Error; }
+    bool isError() const { return type == ValidationResultType::Error; }
 
 private:
     std::string result;
@@ -29,4 +27,4 @@ private:
 };
 
 
-#endif //STRONGTYPETOOL_VALIDATIONRESULT_H
+#endif//STRONGTYPETOOL_VALIDATIONRESULT_H

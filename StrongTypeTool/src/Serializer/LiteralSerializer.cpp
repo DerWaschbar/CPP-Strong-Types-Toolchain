@@ -1,14 +1,14 @@
 //
-// Created by waschbar on 27.03.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 27.03.22.
 //
 
-#include <nlohmann/json.hpp>
-#include <inja/inja.hpp>
 #include "LiteralSerializer.h"
+#include <inja/inja.hpp>
+#include <nlohmann/json.hpp>
 
-std::vector<std::string> LiteralSerializer::serialize(const stt::StrongTypeSet &strongTypeSet) {
+std::vector<std::string> LiteralSerializer::serialize(const stt::StrongTypeSet& strongTypeSet) {
     std::string ops;
-    for(const stt::StrongLiteral &literal : strongTypeSet.getLiterals()) {
+    for(const stt::StrongLiteral& literal : strongTypeSet.getLiterals()) {
         ops += serializeStrongLiteralOp(literal) + "\n";
     }
 
@@ -16,10 +16,10 @@ std::vector<std::string> LiteralSerializer::serialize(const stt::StrongTypeSet &
     literals["name"] = "StrongLiterals";
     literals["ops"] = ops;
 
-    return { inja::render((&templateManager)->getTemplate(Template::T_Literal), literals) };
+    return {inja::render((&templateManager)->getTemplate(Template::T_Literal), literals)};
 }
 
-std::string LiteralSerializer::serializeStrongLiteralOp(const stt::StrongLiteral &strongLiteral) {
+std::string LiteralSerializer::serializeStrongLiteralOp(const stt::StrongLiteral& strongLiteral) {
     nlohmann::json opJson;
     opJson["res"] = strongLiteral.getResType();
     opJson["arg"] = strongLiteral.getArgType();

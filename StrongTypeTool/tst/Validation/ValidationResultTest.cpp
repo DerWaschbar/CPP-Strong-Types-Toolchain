@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 5/8/22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 5/8/22.
 //
 
 #include <gtest/gtest.h>
@@ -35,4 +35,3 @@ TEST(ValidationResult, isError_false) {
     ValidationResult result("text", ValidationResultType::Warning);
     ASSERT_FALSE(result.isError());
 }
-

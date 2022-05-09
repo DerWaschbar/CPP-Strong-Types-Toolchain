@@ -1,9 +1,7 @@
-#include <iostream>
 #include "StrongTypes/Distance.h"
+#include <iostream>
 
-Distance addDistance(Distance base, Distance additional) {
-    return base + additional;
-}
+Distance addDistance(Distance base, Distance additional) { return base + additional; }
 
 int main() {
 

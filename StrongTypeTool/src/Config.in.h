@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 24.03.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 24.03.22.
 //
 
 #ifndef STRONGTYPETOOL_CONFIG_IN_H
@@ -10,4 +10,4 @@
 #cmakedefine RESOURCE_PATH "${RESOURCE_PATH}"
 #cmakedefine CMAKE_CURRENT_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}"
 
-#endif //STRONGTYPETOOL_CONFIG_IN_H
+#endif//STRONGTYPETOOL_CONFIG_IN_H

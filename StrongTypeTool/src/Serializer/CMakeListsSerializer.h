@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 28.02.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 28.02.22.
 //
 
 #ifndef STRONGTYPETOOL_CMAKELISTSSERIALIZER_H
@@ -19,4 +19,4 @@ public:
 };
 
 
-#endif //STRONGTYPETOOL_CMAKELISTSSERIALIZER_H
+#endif//STRONGTYPETOOL_CMAKELISTSSERIALIZER_H

@@ -1,10 +1,11 @@
 //
-// Created by waschbar on 28.02.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 28.02.22.
 //
 
 #include "CMakeListsSerializer.h"
 
-std::string CMakeListsSerializer::serialize(const stt::StrongTypeSet &strongTypeSet, bool headerOnly) {
+std::string CMakeListsSerializer::serialize(const stt::StrongTypeSet& strongTypeSet,
+                                            bool headerOnly) {
     std::string cmake = "add_library(StrongTypes";
     if(headerOnly)
         cmake += " INTERFACE";

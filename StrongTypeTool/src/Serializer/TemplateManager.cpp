@@ -1,9 +1,9 @@
 //
-// Created by waschbar on 10.02.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 10.02.22.
 //
 
-#include <iostream>
 #include "TemplateManager.h"
+#include <iostream>
 
 boost::filesystem::path getFileName(Template aTemplate) {
     switch(aTemplate) {
@@ -30,11 +30,9 @@ std::string TemplateManager::getTemplate(Template aTemplate) const {
     std::string templateString;
     try {
         boost::filesystem::load_string_file(absolute((templateDirPath / fileName)), templateString);
-    }
-    catch(...) {
-        std::cerr << "Failed to retrieve a template file - "
-                  << fileName.string() << " from template directory - "
-                  << templateDirPath.string() << std::endl;
+    } catch(...) {
+        std::cerr << "Failed to retrieve a template file - " << fileName.string()
+                  << " from template directory - " << templateDirPath.string() << std::endl;
         throw;
     }
     return templateString;

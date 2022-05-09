@@ -1,21 +1,22 @@
 //
-// Created by waschbar on 10.02.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 10.02.22.
 //
 
 #include "StrongTypeSet.h"
 
-#include <stack>
 #include <algorithm>
+#include <stack>
 #include <utility>
 
-stt::StrongTypeSet::StrongTypeSet(std::vector<stt::StrongType> types, std::vector<stt::StrongLiteral> literals)
+stt::StrongTypeSet::StrongTypeSet(std::vector<stt::StrongType> types,
+                                  std::vector<stt::StrongLiteral> literals)
     : types(std::move(types)), literals(std::move(literals)) {
 
-    for(stt::StrongType &type : this->types) {
+    for(stt::StrongType& type : this->types) {
         this->nameToType[type.getTypeName()] = &type;
     }
 
-    for(stt::StrongLiteral &literal : this->literals) {
+    for(stt::StrongLiteral& literal : this->literals) {
         this->literalsDependency.insert(literal.getResType());
     }
 
@@ -23,14 +24,15 @@ stt::StrongTypeSet::StrongTypeSet(std::vector<stt::StrongType> types, std::vecto
     this->resolveDependencies();
 }
 
-std::vector<stt::StrongType> stt::StrongTypeSet::getDependencies(const stt::StrongType& type) const {
+std::vector<stt::StrongType>
+stt::StrongTypeSet::getDependencies(const stt::StrongType& type) const {
     if(this->dependencyList.find(type.getTypeName()) == this->dependencyList.end())
         return {};
     return this->dependencyList.at(type.getTypeName());
 }
 
 void stt::StrongTypeSet::buildDependencyGraph() {
-    for(stt::StrongType &type : this->types) {
+    for(stt::StrongType& type : this->types) {
         std::set<stt::StrongType*> usedTypes;
 
         for(const BinaryOperation& op : type.getBinaryOperations()) {
@@ -49,13 +51,14 @@ void stt::StrongTypeSet::buildDependencyGraph() {
                 usedTypes.insert(it->second);
         }
 
-        for(stt::StrongType* usedType : usedTypes)
-            this->dependencyGraph[&type].push_back(usedType);
+        for(stt::StrongType* usedType : usedTypes) this->dependencyGraph[&type].push_back(usedType);
     }
 }
 
-void topologyDFS(stt::StrongType* type, std::map<stt::StrongType*, std::vector<stt::StrongType*>> &graph,
-                 std::map<stt::StrongType*, bool> &visited, std::vector<stt::StrongType*> &reverseTopology) {
+void topologyDFS(stt::StrongType* type,
+                 std::map<stt::StrongType*, std::vector<stt::StrongType*>>& graph,
+                 std::map<stt::StrongType*, bool>& visited,
+                 std::vector<stt::StrongType*>& reverseTopology) {
     visited[type] = true;
     for(stt::StrongType* next : graph[type]) {
         if(!visited[next])
@@ -64,7 +67,8 @@ void topologyDFS(stt::StrongType* type, std::map<stt::StrongType*, std::vector<s
     reverseTopology.push_back(type);
 }
 
-std::map<stt::StrongType*, int> getTopology(std::map<stt::StrongType*, std::vector<stt::StrongType*>> &graph) {
+std::map<stt::StrongType*, int>
+getTopology(std::map<stt::StrongType*, std::vector<stt::StrongType*>>& graph) {
     std::map<stt::StrongType*, bool> visited;
     std::vector<stt::StrongType*> reverseTopology;
 
@@ -83,7 +87,8 @@ std::map<stt::StrongType*, int> getTopology(std::map<stt::StrongType*, std::vect
     return topologyOrder;
 }
 
-void DFS(stt::StrongType* node, std::map<stt::StrongType*, bool> &visited, std::map<stt::StrongType*, std::vector<stt::StrongType*>> &graph) {
+void DFS(stt::StrongType* node, std::map<stt::StrongType*, bool>& visited,
+         std::map<stt::StrongType*, std::vector<stt::StrongType*>>& graph) {
     visited[node] = true;
     for(stt::StrongType* next : graph[node])
         if(!visited[next])
@@ -97,13 +102,12 @@ void stt::StrongTypeSet::resolveDependencies() {
         return order[a] < order[b];
     };
 
-    for(auto &it : this->dependencyGraph) {
+    for(auto& it : this->dependencyGraph) {
         sort(it.second.begin(), it.second.end(), comparator);
     }
 
     std::set<stt::StrongType*, decltype(comparator)> nodes(comparator);
-    for(const auto& it : this->dependencyGraph)
-        nodes.insert(it.first);
+    for(const auto& it : this->dependencyGraph) nodes.insert(it.first);
 
     for(stt::StrongType* node : nodes) {
 
@@ -116,5 +120,4 @@ void stt::StrongTypeSet::resolveDependencies() {
             }
         }
     }
-
 }

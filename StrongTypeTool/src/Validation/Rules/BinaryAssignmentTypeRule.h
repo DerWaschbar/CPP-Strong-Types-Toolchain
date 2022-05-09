@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 29.03.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 29.03.22.
 //
 
 #ifndef STRONGTYPETOOL_BINARYASSIGNMENTTYPERULE_H
@@ -13,4 +13,4 @@ public:
 };
 
 
-#endif //STRONGTYPETOOL_BINARYASSIGNMENTTYPERULE_H
+#endif//STRONGTYPETOOL_BINARYASSIGNMENTTYPERULE_H

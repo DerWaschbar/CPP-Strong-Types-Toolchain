@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 5/7/22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 5/7/22.
 //
 
 #include <gtest/gtest.h>
@@ -40,4 +40,3 @@ TEST(YamlSerializer, serializeUnaryOperation) {
     ASSERT_EQ(node["Operation"].as<std::string>(), op.getOperation());
     ASSERT_EQ(node["ResType"].as<std::string>(), op.getResType());
 }
-

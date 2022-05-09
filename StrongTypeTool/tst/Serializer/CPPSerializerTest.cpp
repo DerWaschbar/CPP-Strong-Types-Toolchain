@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 5/7/22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 5/7/22.
 //
 
 #include <gtest/gtest.h>
@@ -24,8 +24,7 @@ TEST(CPPSerializer, serialize_StrongTypeSet1) {
 }
 
 TEST(CPPSerializer, serialize_StrongTypeSet2) {
-    stt::StrongType T1("TestType", "int",
-                       {stt::BinaryOperation("+", "int", "int")},
+    stt::StrongType T1("TestType", "int", {stt::BinaryOperation("+", "int", "int")},
                        {stt::UnaryOperation("-", "int")});
     stt::StrongTypeSet typeSet({T1}, {});
 
@@ -56,5 +55,3 @@ TEST(CPPSerializer, serialize_Empty) {
 
     ASSERT_EQ(serializer.serialize(typeSet).size(), 0);
 }
-
-

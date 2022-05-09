@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 23.02.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 23.02.22.
 //
 
 #include <gtest/gtest.h>
@@ -22,8 +22,7 @@ TEST(StrongType, getUnaryOperations_0e) {
 }
 
 TEST(StrongType, getUnaryOperations_1e) {
-    stt::StrongType type("TT", "WT", {},
-                         {stt::UnaryOperation("+", "int")});
+    stt::StrongType type("TT", "WT", {}, {stt::UnaryOperation("+", "int")});
     std::vector<stt::UnaryOperation> uOps = type.getUnaryOperations();
     ASSERT_EQ(uOps.size(), 1);
     ASSERT_EQ(uOps[0].getOperation(), "+");
@@ -36,9 +35,7 @@ TEST(StrongType, getBinaryOperations) {
 }
 
 TEST(StrongType, getBinaryOperations_1e) {
-    stt::StrongType type("TT", "WT",
-                         {stt::BinaryOperation("+", "int", "TT")},
-                         {});
+    stt::StrongType type("TT", "WT", {stt::BinaryOperation("+", "int", "TT")}, {});
     std::vector<stt::BinaryOperation> bOps = type.getBinaryOperations();
     ASSERT_EQ(bOps.size(), 1);
     ASSERT_EQ(bOps[0].getOperation(), "+");

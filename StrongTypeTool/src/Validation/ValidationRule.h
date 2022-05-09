@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 29.03.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 29.03.22.
 //
 
 #ifndef STRONGTYPETOOL_VALIDATIONRULE_H
@@ -16,4 +16,4 @@ public:
 };
 
 
-#endif //STRONGTYPETOOL_VALIDATIONRULE_H
+#endif//STRONGTYPETOOL_VALIDATIONRULE_H

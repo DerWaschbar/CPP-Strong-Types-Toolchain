@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 11.01.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 11.01.22.
 //
 
 #ifndef STRONGTYPETOOL_BINARYOPERATION_H
@@ -14,18 +14,19 @@ namespace stt {
         std::string operation;
         std::string argType;
         std::string resType;
+
     public:
-        const std::string &getOperation() const;
-        const std::string &getArgType() const;
-        const std::string &getResType() const;
+        const std::string& getOperation() const;
+        const std::string& getArgType() const;
+        const std::string& getResType() const;
 
         bool isBinaryAssignment() const;
 
         BinaryOperation(std::string operation, std::string argType, std::string resType)
-            : operation(std::move(operation)), argType(std::move(argType)), resType(std::move(resType)) {}
+            : operation(std::move(operation)), argType(std::move(argType)),
+              resType(std::move(resType)) {}
     };
-}
+}// namespace stt
 
 
-
-#endif //STRONGTYPETOOL_BINARYOPERATION_H
+#endif//STRONGTYPETOOL_BINARYOPERATION_H

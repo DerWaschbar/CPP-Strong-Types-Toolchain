@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 26.03.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 26.03.22.
 //
 
 #ifndef STRONGTYPETOOL_STRONGLITERAL_H
@@ -14,14 +14,15 @@ namespace stt {
         std::string suffix;
         std::string argType;
         std::string resType;
+
     public:
-        const std::string &getSuffix() const;
-        const std::string &getArgType() const;
-        const std::string &getResType() const;
+        const std::string& getSuffix() const;
+        const std::string& getArgType() const;
+        const std::string& getResType() const;
 
         StrongLiteral(std::string suffix, std::string argType, std::string resType)
-        : suffix(std::move(suffix)), argType(std::move(argType)), resType(std::move(resType)) {}
+            : suffix(std::move(suffix)), argType(std::move(argType)), resType(std::move(resType)) {}
     };
-}
+}// namespace stt
 
-#endif //STRONGTYPETOOL_STRONGLITERAL_H
+#endif//STRONGTYPETOOL_STRONGLITERAL_H

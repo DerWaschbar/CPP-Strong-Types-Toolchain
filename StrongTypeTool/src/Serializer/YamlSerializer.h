@@ -1,12 +1,12 @@
 //
-// Created by waschbar on 12.01.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 12.01.22.
 //
 
 #ifndef STRONGTYPETOOL_YAMLSERIALIZER_H
 #define STRONGTYPETOOL_YAMLSERIALIZER_H
 
-#include "yaml-cpp/yaml.h"
 #include "../Entities/StrongTypeSet.h"
+#include "yaml-cpp/yaml.h"
 
 class YamlSerializer {
 public:
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //STRONGTYPETOOL_YAMLSERIALIZER_H
+#endif//STRONGTYPETOOL_YAMLSERIALIZER_H

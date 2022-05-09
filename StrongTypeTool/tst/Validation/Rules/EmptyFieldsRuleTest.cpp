@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 5/8/22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 5/8/22.
 //
 
 #include <gtest/gtest.h>
@@ -25,11 +25,9 @@ TEST(EmptyFieldsRule, validate_faulty) {
 }
 
 TEST(EmptyFieldsRule, validate_all_faulty) {
-    stt::StrongTypeSet set(
-            {stt::StrongType("", "",
-                             {stt::BinaryOperation("", "", "")},
-                             {stt::UnaryOperation("", "")})},
-            {stt::StrongLiteral("", "", "")});
+    stt::StrongTypeSet set({stt::StrongType("", "", {stt::BinaryOperation("", "", "")},
+                                            {stt::UnaryOperation("", "")})},
+                           {stt::StrongLiteral("", "", "")});
     EmptyFieldsRule rule;
     ASSERT_EQ(rule.validate(set).size(), 10);
 }

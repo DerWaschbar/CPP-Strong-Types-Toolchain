@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 10.02.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 10.02.22.
 //
 
 #ifndef STRONGTYPETOOL_TEMPLATEMANAGER_H
@@ -31,8 +31,9 @@ enum class Template {
 
 class TemplateManager {
     using path = boost::filesystem::path;
+
 public:
-    explicit TemplateManager(path  templateDirPath) : templateDirPath(std::move(templateDirPath)) {}
+    explicit TemplateManager(path templateDirPath) : templateDirPath(std::move(templateDirPath)) {}
     TemplateManager() : TemplateManager(path(RESOURCE_PATH) / "Templates") {}
 
     virtual std::string getTemplate(Template aTemplate) const;
@@ -42,4 +43,4 @@ public:
 };
 
 
-#endif //STRONGTYPETOOL_TEMPLATEMANAGER_H
+#endif//STRONGTYPETOOL_TEMPLATEMANAGER_H

@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 11.01.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 11.01.22.
 //
 
 #include "YamlDeserializer.h"
@@ -21,8 +21,7 @@ stt::StrongTypeSet YamlDeserializer::deserialize(const std::string& filePath) {
 }
 
 stt::StrongLiteral YamlDeserializer::deserializeStrongLiteral(YAML::Node node) {
-    return {node["Suffix"].as<std::string>(),
-            node["ArgType"].as<std::string>(),
+    return {node["Suffix"].as<std::string>(), node["ArgType"].as<std::string>(),
             node["ResType"].as<std::string>()};
 }
 
@@ -30,7 +29,8 @@ stt::StrongLiteral YamlDeserializer::deserializeStrongLiteral(YAML::Node node) {
 stt::StrongType YamlDeserializer::deserializeStrongType(YAML::Node node) {
     stt::StrongType::Builder builder;
 
-    builder.setTypeName(node["TypeName"].as<std::string>())->setWraps(node["Wraps"].as<std::string>());
+    builder.setTypeName(node["TypeName"].as<std::string>())
+            ->setWraps(node["Wraps"].as<std::string>());
 
     std::vector<stt::BinaryOperation> binOps{};
     for(int i = 0; i < node["BinaryOperations"].size(); i++) {
@@ -48,14 +48,10 @@ stt::StrongType YamlDeserializer::deserializeStrongType(YAML::Node node) {
 }
 
 stt::BinaryOperation YamlDeserializer::deserializeBinaryOperation(YAML::Node node) {
-    return {node["Operation"].as<std::string>(),
-            node["ArgType"].as<std::string>(),
-            node["ResType"].as<std::string>()
-            };
+    return {node["Operation"].as<std::string>(), node["ArgType"].as<std::string>(),
+            node["ResType"].as<std::string>()};
 }
 
 stt::UnaryOperation YamlDeserializer::deserializeUnaryOperation(YAML::Node node) {
-    return {node["Operation"].as<std::string>(),
-            node["ResType"].as<std::string>()
-            };
+    return {node["Operation"].as<std::string>(), node["ResType"].as<std::string>()};
 }

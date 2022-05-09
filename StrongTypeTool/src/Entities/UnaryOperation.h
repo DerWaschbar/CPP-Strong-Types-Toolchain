@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 12.01.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 12.01.22.
 //
 
 #ifndef STRONGTYPETOOL_UNARYOPERATION_H
@@ -12,14 +12,15 @@ namespace stt {
     private:
         std::string operation;
         std::string resType;
+
     public:
-        const std::string &getOperation() const;
-        const std::string &getResType() const;
+        const std::string& getOperation() const;
+        const std::string& getResType() const;
 
         UnaryOperation(std::string operation, std::string resType)
-        : operation(std::move(operation)), resType(std::move(resType)) {}
+            : operation(std::move(operation)), resType(std::move(resType)) {}
     };
-}
+}// namespace stt
 
 
-#endif //STRONGTYPETOOL_UNARYOPERATION_H
+#endif//STRONGTYPETOOL_UNARYOPERATION_H

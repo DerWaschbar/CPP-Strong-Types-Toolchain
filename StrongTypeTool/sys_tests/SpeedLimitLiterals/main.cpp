@@ -7,10 +7,7 @@
 const Speed MAX_SPEED_LIMIT = 90_kmh;
 const Speed MIN_SPEED_LIMIT = 20_kmh;
 
-bool checkIfAllowed(Speed speed) {
-    return MIN_SPEED_LIMIT <= speed
-           && MAX_SPEED_LIMIT >= speed;
-}
+bool checkIfAllowed(Speed speed) { return MIN_SPEED_LIMIT <= speed && MAX_SPEED_LIMIT >= speed; }
 
 int main() {
 

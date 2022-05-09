@@ -1,10 +1,10 @@
 //
-// Created by waschbar on 13.02.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 13.02.22.
 //
 
 #include <gtest/gtest.h>
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
 
     testing::InitGoogleTest(&argc, argv);
 

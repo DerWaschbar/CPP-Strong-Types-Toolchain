@@ -1,12 +1,12 @@
 //
-// Created by waschbar on 16.03.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 16.03.22.
 //
 
-#include <iostream>
 #include <boost/program_options.hpp>
+#include <iostream>
+
 #include "GenerationConfig.h"
 #include "Generator.h"
-
 #include "Validation/Validator.h"
 
 namespace po = boost::program_options;
@@ -22,13 +22,12 @@ po::options_description initDescription() {
             ("header-only", "Generated header only library")
             ("root-path", po::value<std::string>(), "Directory path for StrongTypes folder to be generated in")
             ("templates-path", po::value<std::string>(), "Path for Template directory")
-            ("config-path", po::value<std::string>(), "Configuration file path")
-            ;
+            ("config-path", po::value<std::string>(), "Configuration file path");
 
     return description;
 }
 
-GenerationConfig::Builder getConfigBuilder(po::variables_map vm) {
+GenerationConfig::Builder getConfigBuilder(const po::variables_map& vm) {
     GenerationConfig::Builder builder = GenerationConfig::Builder();
 
     if(vm.count("header-only")) {
@@ -65,9 +64,7 @@ void validate(const std::string& fileName) {
 
     std::cout << "YAML configuration violates part or all of the validation rules: \n\n";
     for(const ValidationResult& result : results) {
-        std::cout
-            << (result.isError() ? "Error: " : "Warning: ")
-            << result.getResult() << "\n\n";
+        std::cout << (result.isError() ? "Error: " : "Warning: ") << result.getResult() << "\n\n";
     }
 }
 
@@ -78,10 +75,13 @@ int main(int argc, char** argv) {
     posDescriptions.add("config-path", 1);
 
     po::variables_map vm;
-    po::store(po::command_line_parser(argc, argv).options(description).positional(posDescriptions)
-                .style(po::command_line_style::default_style |
-                       po::command_line_style::allow_long_disguise)
-                .run(), vm);
+    po::store(po::command_line_parser(argc, argv)
+                      .options(description)
+                      .positional(posDescriptions)
+                      .style(po::command_line_style::default_style |
+                             po::command_line_style::allow_long_disguise)
+                      .run(),
+              vm);
     po::notify(vm);
 
     if(vm.empty() || vm.count("help") || !vm.count("config-path")) {
@@ -105,10 +105,7 @@ int main(int argc, char** argv) {
                      "\tadd_subdirectory(StrongTypes)\n"
                      "\ttarget_link_libraries(<target_name> PUBLIC StrongTypes)\n"
                      "```\n";
-    }
-    else {
+    } else {
         std::cerr << "Error: Can not generate strong types library!";
     }
-
 }
-

@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 12.01.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 12.01.22.
 //
 
 #include "YamlSerializer.h"

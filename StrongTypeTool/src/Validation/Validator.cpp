@@ -1,5 +1,5 @@
 //
-// Created by waschbar on 29.03.22.
+// Created by Beka Grdzelishvili (DerWaschbar) on 29.03.22.
 //
 
 #include "Validator.h"
