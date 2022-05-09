@@ -6,7 +6,10 @@
 
 GenerationConfig::GenerationConfig(const GenerationConfig::Builder &builder) {
     this->headerOnly = builder.headerOnly;
+    this->validate = builder.validate;
     this->sttRootPath = builder.sttRootPath;
+    this->templatesPath = builder.templatesPath;
+    this->validationOut = builder.validationOut;
 }
 
 GenerationConfig::Builder *GenerationConfig::Builder::makeHeaderOnly() {

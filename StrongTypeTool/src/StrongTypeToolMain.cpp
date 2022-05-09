@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
                      "```\n";
     }
     else {
-        std::cout << "Error: Can not generate strong types library!";
+        std::cerr << "Error: Can not generate strong types library!";
     }
 
 }

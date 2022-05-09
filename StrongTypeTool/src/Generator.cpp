@@ -60,19 +60,22 @@ stt::StrongTypeSet Generator::loadConfiguration() {
 }
 
 bool Generator::generateStrongType(const stt::StrongType& type, const std::vector<stt::StrongType>& dependencyList, const GenerationConfig& config) {
+    TemplateManager templateManager = config.getTemplatesPath().has_value() ?
+            TemplateManager(config.getTemplatesPath().value()) : TemplateManager();
+
     if(config.isHeaderOnly()) {
-        HeaderOnlySerializer serializer;
+        HeaderOnlySerializer serializer(templateManager);
         const std::string headerFileName = type.getTypeName() + ".h";
         const std::string headerText = serializer.serializeStrongType(type, dependencyList);
 
         boost::filesystem::ofstream(this->rootPath / headerFileName) << headerText;
     }
     else {
-        CPPHSerializer cpphSerializer;
+        CPPHSerializer cpphSerializer(templateManager);
         const std::string headerFileName = type.getTypeName() + ".h";
         const std::string headerText = cpphSerializer.serializeStrongType(type, dependencyList);
 
-        CPPSerializer cppSerializer;
+        CPPSerializer cppSerializer(templateManager);
         const std::string classFileName = type.getTypeName() + ".cpp";
         const std::string classText = cppSerializer.serializeStrongType(type);
 
@@ -84,19 +87,22 @@ bool Generator::generateStrongType(const stt::StrongType& type, const std::vecto
 }
 
 bool Generator::generateStrongLiterals(const stt::StrongTypeSet& strongTypeSet, const GenerationConfig& config) {
+    TemplateManager templateManager = config.getTemplatesPath().has_value() ?
+                                      TemplateManager(config.getTemplatesPath().value()) : TemplateManager();
+
     if(config.isHeaderOnly()) {
-        LiteralHeaderOnlySerializer serializer;
+        LiteralHeaderOnlySerializer serializer(templateManager);
         const std::string headerFileName = "StrongLiterals.h";
         const std::string headerText = serializer.serialize(strongTypeSet)[0];
 
         boost::filesystem::ofstream(this->rootPath / headerFileName) << headerText;
     }
     else {
-        LiteralHSerializer hSerializer;
+        LiteralHSerializer hSerializer(templateManager);
         const std::string headerFileName = "StrongLiterals.h";
         const std::string headerText = hSerializer.serialize(strongTypeSet)[0];
 
-        LiteralSerializer serializer;
+        LiteralSerializer serializer(templateManager);
         const std::string classFileName = "StrongLiterals.cpp";
         const std::string classText = serializer.serialize(strongTypeSet)[0];
 
@@ -122,9 +128,9 @@ bool Generator::validate(const stt::StrongTypeSet &strongTypeSet, const Generati
         return true;
     }
     else {
-        std::cout << "YAML configuration violates part or all of the validation rules.\n";
+        std::cerr << "YAML configuration violates part or all of the validation rules.\n";
 
-        path vout = config.getTemplatesPath().value_or(boost::filesystem::current_path() / "stgenerator-validation-output.txt");
+        path vout = config.getValidationOutPath().value_or(boost::filesystem::current_path() / "stgenerator-validation-output.txt");
         boost::filesystem::ofstream  ofs(vout);
 
         ofs << "STGenerator Validation Result\n\n";
