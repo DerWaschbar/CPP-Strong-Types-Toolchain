@@ -1,0 +1,7 @@
+StrongTypes:
+  - TypeName: "Time"
+    BinaryOperations:
+      - Operation: "+"
+        ArgType: "Time"
+        ResType: "Time"
+
