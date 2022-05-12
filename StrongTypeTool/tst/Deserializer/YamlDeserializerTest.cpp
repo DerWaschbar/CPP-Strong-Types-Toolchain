@@ -33,6 +33,57 @@ TEST(YamlDeserializer, deserialize) {
     ASSERT_EQ(typeSet.getTypes()[1].getWraps(), "int");
 }
 
+TEST(YamlDeserializer, deserialize_large) {
+    const std::string configData = "StrongTypes:\n"
+                                   "\n"
+                                   "  - TypeName: \"Distance\"\n"
+                                   "    Wraps: \"float\"\n"
+                                   "    BinaryOperations:\n"
+                                   "      - Operation: \"/\"\n"
+                                   "        ArgType: \"Time\"\n"
+                                   "        ResType: \"Velocity\"\n"
+                                   "\n"
+                                   "  - TypeName: \"Time\"\n"
+                                   "    Wraps: \"float\"\n"
+                                   "\n"
+                                   "  - TypeName: \"Speed\"\n"
+                                   "    Wraps: \"int\"\n"
+                                   "\n"
+                                   "  - TypeName: \"Velocity\"\n"
+                                   "    Wraps: \"float\"\n"
+                                   "    BinaryOperations:\n"
+                                   "      - Operation: \"+\"\n"
+                                   "        ArgType: \"Velocity\"\n"
+                                   "        ResType: \"Velocity\"\n"
+                                   "      - Operation: \"+=\"\n"
+                                   "        ArgType: \"Velocity\"\n"
+                                   "        ResType: \"Velocity\"\n"
+                                   "      - Operation: \"/\"\n"
+                                   "        ArgType: \"float\"\n"
+                                   "        ResType: \"Velocity\"\n"
+                                   "    UnaryOperations:\n"
+                                   "      - Operation: \"-\"\n"
+                                   "        ResType: \"Velocity\"\n"
+                                   "\n"
+                                   "StrongLiterals:\n"
+                                   "  - Suffix: \"_kmh\"\n"
+                                   "    ArgType: \"unsigned long long\"\n"
+                                   "    ResType: \"Speed\"";
+    const std::string testFileName = "stt-test-config.yaml";
+    const boost::filesystem::path filePath = boost::filesystem::current_path() / testFileName;
+
+    if(boost::filesystem::exists(filePath)) {
+        boost::filesystem::remove(filePath);
+    }
+    boost::filesystem::ofstream ofs(filePath);
+    ofs << configData;
+    ofs.close();
+
+    stt::StrongTypeSet typeSet = YamlDeserializer().deserialize(filePath.string());
+    ASSERT_EQ(typeSet.getTypes().size(), 4);
+    ASSERT_EQ(typeSet.getLiterals().size(), 1);
+}
+
 TEST(YamlDeserializer, deserializeStrongType) {
     YAML::Node node;
     node["TypeName"] = "StrongType";

@@ -42,3 +42,12 @@ TEST(StrongType, getBinaryOperations_1e) {
     ASSERT_EQ(bOps[0].getArgType(), "int");
     ASSERT_EQ(bOps[0].getResType(), "TT");
 }
+
+TEST(StrongType, getBinaryOperations_large) {
+    stt::StrongType type("TT", "WT", {stt::BinaryOperation("+", "int", "TT")},
+                         {stt::UnaryOperation("+", "int")});
+    const std::vector<stt::BinaryOperation>& bOps = type.getBinaryOperations();
+    ASSERT_EQ(bOps.size(), 1);
+    const std::vector<stt::UnaryOperation>& uOps = type.getUnaryOperations();
+    ASSERT_EQ(uOps.size(), 1);
+}

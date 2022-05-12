@@ -35,6 +35,18 @@ TEST(StrongTypeSet, getDependencies_2) {
     ASSERT_EQ(types.size(), 0);
 }
 
+TEST(StrongTypeSet, getDependencies_3) {
+    stt::StrongType T1 = stt::StrongType("T0", "WT", {}, {stt::UnaryOperation("-", "T3")});
+    stt::StrongType T2 = stt::StrongType("T1", "WT", {stt::BinaryOperation("+", "T3", "int")},
+                                         {stt::UnaryOperation("-", "T1")});
+    stt::StrongType T3 = stt::StrongType("T3", "WT", {}, {});
+
+    stt::StrongTypeSet typeSet({T1, T2, T3});
+
+    std::vector<stt::StrongType> types = typeSet.getDependencies(T2);
+    ASSERT_EQ(types.size(), 1);
+}
+
 TEST(StrongTypeSet, hasLiterals_false) {
     stt::StrongTypeSet typeSet({stt::StrongType("ST", "WT", {}, {})});
 
