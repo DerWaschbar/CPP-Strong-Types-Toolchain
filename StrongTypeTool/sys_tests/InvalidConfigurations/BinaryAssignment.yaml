@@ -1,0 +1,7 @@
+StrongTypes:
+  - TypeName: "Time"
+    Wraps: "float"
+    BinaryOperations:
+      - Operation: "+="
+        ArgType: "Time"
+        ResType: "int"

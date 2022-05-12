@@ -1,0 +1,8 @@
+StrongTypes:
+  - TypeName: "Speed"
+    Wraps: "unsigned long long"
+
+StrongLiterals:
+  - Suffix: "_kmh"
+    ArgType: "int"
+    ResType: "Speed"
