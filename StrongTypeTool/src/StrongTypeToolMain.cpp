@@ -54,8 +54,17 @@ GenerationConfig::Builder getConfigBuilder(const po::variables_map& vm) {
 }
 
 void validate(const std::string& fileName) {
+    std::optional<stt::StrongTypeSet> oTypeSet;
+    try {
+        oTypeSet = YamlDeserializer().deserialize(fileName);
+    } catch(...) {
+        std::cerr << "Could not deserialize the configuration file.\n"
+                  << "Try checking it against the schema with Yamale.\n";
+        return;
+    }
+
     Validator validator;
-    std::vector<ValidationResult> results = validator.validate(fileName);
+    std::vector<ValidationResult> results = validator.validate(oTypeSet.value());
 
     if(results.empty()) {
         std::cout << "YAML configuration satisfies all validation rules.\n";

@@ -28,7 +28,12 @@ Generator::Generator(const path& configPath, const Validator& validator) {
 
 bool Generator::generate(const GenerationConfig& config) {
     this->rootPath = config.getRootPath().value_or(configPath.parent_path()) / "StrongTypes";
-    stt::StrongTypeSet typeSet = loadConfiguration();
+
+    std::optional<stt::StrongTypeSet> oTypeSet = loadConfiguration();
+    if(!oTypeSet.has_value()) {
+        return false;
+    }
+    stt::StrongTypeSet typeSet = oTypeSet.value();
 
     if(config.validationEnabled()) {
         if(!validate(typeSet, config))
@@ -52,10 +57,16 @@ bool Generator::generate(const GenerationConfig& config) {
     return true;
 }
 
-stt::StrongTypeSet Generator::loadConfiguration() {
-    if(this->deserializer.has_value())
-        return this->deserializer.value()->deserialize(configPath.string());
-    return YamlDeserializer().deserialize(configPath.string());
+std::optional<stt::StrongTypeSet> Generator::loadConfiguration() {
+    try {
+        if(this->deserializer.has_value())
+            return this->deserializer.value()->deserialize(configPath.string());
+        return YamlDeserializer().deserialize(configPath.string());
+    } catch (...) {
+        std::cerr << "Could not deserialize the configuration file.\n"
+                  << "Try checking it against the schema with Yamale.\n";
+        return {};
+    }
 }
 
 bool Generator::generateStrongType(const stt::StrongType& type,

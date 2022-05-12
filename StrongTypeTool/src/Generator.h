@@ -24,7 +24,7 @@ public:
     }
 
 private:
-    stt::StrongTypeSet loadConfiguration();
+    std::optional<stt::StrongTypeSet> loadConfiguration();
     bool generateStrongType(const stt::StrongType& type,
                             const std::vector<stt::StrongType>& dependencyList,
                             const GenerationConfig& config);
